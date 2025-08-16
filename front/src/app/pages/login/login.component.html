@@ -1,0 +1,28 @@
+<button mat-icon-button class="back-btn" (click)="goBack()" aria-label="Retour">
+  <mat-icon>arrow_back</mat-icon>
+</button>
+
+<img src="assets/logo_p6.png" alt="Logo" class="register-logo" />
+
+<h2 class="centered">Se connecter</h2>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+  <div class="form-group">
+    <label for="identifier">E-mail ou nom d'utilisateur :</label>
+    <input id="identifier" formControlName="identifier" />
+    <div *ngIf="submitted && loginForm.controls['identifier'].invalid" class="error">
+      Champ requis
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="password">Mot de passe :</label>
+    <input id="password" type="password" formControlName="password" />
+    <div *ngIf="submitted && loginForm.controls['password'].invalid" class="error">
+      Champ requis
+    </div>
+  </div>
+  <button type ="submit" mat-raised-button color="primary" class="validation-sbm" >Se connecter</button>
+</form>
+
+<div *ngIf="success$ | async as success" class="centered">
+  <span *ngIf="!success" class="error">Identifiants invalides</span>
+</div>

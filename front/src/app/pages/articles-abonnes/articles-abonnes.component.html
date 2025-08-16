@@ -1,0 +1,27 @@
+<div class="articles-header">
+  <div class="button-row">
+    <button mat-raised-button color="primary" routerLink="/article">
+      Créer un article
+    </button>
+  </div>
+  <div class="sort-container">
+    <span class="sort-label">Trier par</span>
+    <button mat-icon-button (click)="toggleSort()" class="sort-btn" aria-label="Inverser l'ordre">
+      <mat-icon>{{ sortDesc ? 'arrow_downward' : 'arrow_upward' }}</mat-icon>
+    </button>
+  </div>
+</div>
+<div class="articles-grid" *ngIf="articles$ | async as state">
+  <div
+    class="article-card"
+    *ngFor="let article of state.data"
+    (click)="goToDetail(article.id)"
+  >
+    <b>{{ article.titre }}</b>
+    <p class="meta">Date {{ article.date | date:'short' }} &nbsp; Auteur {{ article.auteurUsername }}</p>
+    <p class="contenu">{{ article.contenu }}</p>
+  </div>
+  <div *ngIf="state.loading">Chargement...</div>
+  <div *ngIf="state.error">Erreur lors du chargement des articles.</div>
+</div>
+ 

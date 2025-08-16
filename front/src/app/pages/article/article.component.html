@@ -1,0 +1,37 @@
+<button mat-icon-button class="back-btn" (click)="goBack()" aria-label="Retour">
+  <mat-icon>arrow_back</mat-icon>
+</button>
+
+<h2 class="form-title">Créer un nouvel article</h2>
+<form [formGroup]="articleForm" (ngSubmit)="onSubmit()" class="article-form">
+
+<div class="form-group">
+    <label for="themeId">Thème :</label>
+    <select id="themeId" formControlName="themeId">
+      <option value="" disabled>Choisir un thème</option>
+      <option *ngFor="let topic of topics$ | async" [value]="topic.id">{{ topic.name }}</option>
+    </select>
+    <div *ngIf="submitted && articleForm.controls['themeId'].invalid" class="error">Thème requis</div>
+  </div>
+
+  <div class="form-group">
+    <label for="titre">Titre :</label>
+    <input id="titre" formControlName="titre" />
+    <div *ngIf="submitted && articleForm.controls['titre'].invalid" class="error">Titre requis</div>
+  </div>
+
+  <div class="form-group">
+    <label for="contenu">Contenu :</label>
+    <textarea id="contenu" formControlName="contenu"></textarea>
+    <div *ngIf="submitted && articleForm.controls['contenu'].invalid" class="error">Contenu requis</div>
+  </div>
+
+  
+
+  <button type="submit" mat-raised-button color="primary" class="submit-btn">Créer l'article</button>
+</form>
+
+<div *ngIf="success$ | async as success">
+  <span *ngIf="success" class="success">Article créé avec succès !</span>
+  <span *ngIf="!success" class="error">Erreur lors de la création de l'article.</span>
+</div>
