@@ -1,0 +1,21 @@
+:host .sidenav-container {
+  height: 100vh;
+}
+
+:host .mobile-sidenav {
+  width: 250px;
+
+  nav {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+
+    a {
+      margin: 10px 0;
+    }
+
+    .logout {
+      color: red;
+    }
+  }
+}

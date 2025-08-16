@@ -1,0 +1,51 @@
+<!-- wrapper centré -->
+<div class="create-article-wrapper">
+
+    <!-- ligne 1 : flèche seule, alignée à gauche -->
+    <button mat-icon-button class="back-btn" aria-label="Retour" (click)="back()">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+
+    <!-- ligne 2 : titre centré -->
+    <h1 class="page-title">Créer un nouvel article</h1>
+
+    <!-- formulaire -->
+    <form [formGroup]="form" class="article-form">
+
+        <!-- Sélection du thème -->
+        <mat-form-field appearance="outline" class="full">
+            <mat-label>Sélectionner un thème</mat-label>
+            <mat-select formControlName="theme">
+                <mat-option *ngFor="let t of themes" [value]="t.id">
+                    {{ t.name }}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('theme')?.hasError('required')">
+                Théme obligatoire
+            </mat-error>
+        </mat-form-field>
+
+        <!-- Titre -->
+        <mat-form-field appearance="outline" class="full">
+            <mat-label>Titre de l’article</mat-label>
+            <input matInput formControlName="title" />
+            <mat-error *ngIf="form.get('title')?.hasError('required')">
+                Titre obligatoire
+            </mat-error>
+        </mat-form-field>
+
+        <!-- Contenu -->
+        <mat-form-field appearance="outline" class="full">
+            <mat-label>Contenu de l’article</mat-label>
+            <textarea matInput rows="6" formControlName="content"></textarea>
+            <mat-error *ngIf="form.get('content')?.hasError('required')">
+                Contenu obligatoire
+            </mat-error>
+        </mat-form-field>
+
+        <!-- Bouton -->
+        <button mat-raised-button color="primary" type="button" (click)="create()" [disabled]="form.invalid">
+            Créer
+        </button>
+    </form>
+</div>

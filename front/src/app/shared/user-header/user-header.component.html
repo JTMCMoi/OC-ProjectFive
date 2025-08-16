@@ -1,0 +1,15 @@
+<mat-toolbar color="white" class="header-toolbar">
+    <span class="logo"><img src="/assets/logo_p6.png" alt="MDD Logo" class="logo" /></span>
+    <span class="spacer"></span>
+    <button mat-icon-button (click)="toggleSidenav()" class="menu-button">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <nav class="desktop-nav">
+        <a mat-button class="logout" (click)="logOut()">Se déconnecter</a>
+        <a mat-button routerLink="/articles" routerLinkActive="active">Articles</a>
+        <a mat-button routerLink="/theme" routerLinkActive="active">Thèmes</a>
+        <button mat-icon-button routerLink="/utilisateur/profile" routerLinkActive="active">
+            <mat-icon>account_circle</mat-icon>
+        </button>
+    </nav>
+</mat-toolbar>

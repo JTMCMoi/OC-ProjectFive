@@ -1,0 +1,44 @@
+
+:host .create-article-wrapper {
+  margin: 0 auto;           
+  padding: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;     
+}
+
+
+:host .back-btn {
+  align-self: flex-start;    
+  height: 32px;
+  width: 32px;
+  margin-bottom: .5rem;      
+}
+
+
+:host .page-title {
+  margin: 0 0 2rem 0;
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+:host .article-form {
+  width: 420px;             
+  max-width: 100%;         
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+
+:host .full { width: 100%; }
+
+@media (max-width: 600px) {
+  :host .create-article-wrapper { padding: .75rem; }
+
+  :host .page-title { font-size: 1.1rem; }
+
+  :host .article-form { width: 100%; }
+}

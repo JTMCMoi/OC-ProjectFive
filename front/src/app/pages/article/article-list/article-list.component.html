@@ -1,0 +1,31 @@
+<div class="articles-container">
+  <div class="header-actions">
+    <button mat-raised-button color="primary" (click)="create()">Créer un article</button>
+    <div class="sort">
+      <mat-form-field appearance="fill">
+        <mat-label>Trier par</mat-label>
+        <mat-select [(value)]="sortOrder" (selectionChange)="loadArticles()">
+          <mat-option value="desc">Plus récent</mat-option>
+          <mat-option value="asc">Plus ancien</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="articles-grid">
+    <mat-card class="article-card" *ngFor="let article of articles" (click)="goToArticle(article.id)">
+      <mat-card-header>
+        <mat-card-title>{{article.title}}</mat-card-title>
+        <mat-card-subtitle>
+          <span>Date : {{ article.createdAt | date:'dd/MM/yy HH:mm:ss' }}</span> · <span>Auteur :
+            {{article.authorName}}</span>
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>
+          {{ article.content | slice:0:120 }}...
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

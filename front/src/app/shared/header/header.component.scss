@@ -1,0 +1,36 @@
+.app-header {
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+  text-align: left;
+}
+
+.logo {
+  height: 70px;
+  max-width: 180px;
+}
+
+.back-bar {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.logo-mobile-wrapper {
+  display: none;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.logo-mobile {
+  height: 100px;
+}
+
+@media (max-width: 768px) {
+  .app-header {
+    display: none;
+  }
+
+  .logo-mobile-wrapper {
+    display: block;
+  }
+}

@@ -1,7 +1,35 @@
-.center {
+:host .center {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+:host .logo {
+  max-width: 500px;
+  height: auto;
+  margin-bottom: 30px;
+}
+
+:host .button-group {
+  display: flex;
+  gap: 20px;
+}
+
+@media (max-width: 600px) {
+  :host .button-group {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
+
+  :host .button-group button {
+    width: 80%;
+  }
+  :host .logo {
+  max-width: 200px;
+  height: auto;
+  margin-bottom: 30px;
+}
 }

@@ -1,0 +1,42 @@
+<div class="title-row">
+    <button mat-icon-button routerLink="/articles">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h2 class="article-title">{{article?.title}}</h2>
+</div>
+
+<div class="article-detail-container" *ngIf="article">
+    <div class="meta">
+        <span>Date: {{ article.createdAt | date:'shortDate' }}</span>
+        <span>Auteur: {{ article.authorName }}</span>
+        <span>Thème: {{ article.theme }}</span>
+    </div>
+
+    <div class="content">
+        <p>Content: {{ article.content }}</p>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <h3>Commentaires</h3>
+
+    <div class="comment" *ngFor="let c of comments">
+        <span class="username">{{ c.authorUsername }}</span>
+        <div class="comment-bubble">
+            <p class="text">{{ c.content }}</p>
+            <div class="comment-meta">
+        <small class="text-muted">{{ c.createdAt | date:'dd/MM/yyyy à HH:mm' }}</small>
+      </div>
+        </div> 
+    </div>
+    
+
+    <div class="comment-input-wrapper">
+        <mat-form-field appearance="outline" class="comment-field">
+            <textarea matInput placeholder="Écrivez ici votre commentaire" [(ngModel)]="commentContent"></textarea>
+        </mat-form-field>
+        <button mat-icon-button color="primary" (click)="sendComment()">
+            <mat-icon>send</mat-icon>
+        </button>
+    </div>
+</div>
