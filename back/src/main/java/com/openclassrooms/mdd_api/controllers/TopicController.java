@@ -2,7 +2,7 @@ package com.openclassrooms.mdd_api.controllers;
 
 import com.openclassrooms.mdd_api.dto.topic.GetTopicResponseDto;
 import com.openclassrooms.mdd_api.exception.ApiException;
-import com.openclassrooms.mdd_api.service.TopicService;
+import com.openclassrooms.mdd_api.service.implementations.TopicService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;

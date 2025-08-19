@@ -2,7 +2,7 @@ package com.openclassrooms.mdd_api.controllers;
 
 import com.openclassrooms.mdd_api.dto.post.CreatePostRequestDto;
 import com.openclassrooms.mdd_api.exception.ApiException;
-import com.openclassrooms.mdd_api.service.PostService;
+import com.openclassrooms.mdd_api.service.implementations.PostService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

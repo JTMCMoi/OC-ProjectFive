@@ -1,4 +1,4 @@
-package com.openclassrooms.mdd_api.service;
+package com.openclassrooms.mdd_api.service.interfaces;
 
 import com.openclassrooms.mdd_api.dto.post.CreatePostRequestDto;
 import com.openclassrooms.mdd_api.dto.post.GetPostResponseDto;
@@ -13,5 +13,5 @@ public interface IPostService {
 
     void createPost(JwtAuthenticationToken token, CreatePostRequestDto post);
 
-    
+
 }

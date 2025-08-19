@@ -1,4 +1,4 @@
-package com.openclassrooms.mdd_api.service;
+package com.openclassrooms.mdd_api.service.implementations;
 
 import com.openclassrooms.mdd_api.dto.topic.GetTopicResponseDto;
 import com.openclassrooms.mdd_api.exception.ApiException;
@@ -7,6 +7,7 @@ import com.openclassrooms.mdd_api.model.Topic;
 import com.openclassrooms.mdd_api.model.User;
 import com.openclassrooms.mdd_api.repository.TopicRepository;
 import com.openclassrooms.mdd_api.repository.UserRepository;
+import com.openclassrooms.mdd_api.service.interfaces.ITopicService;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 

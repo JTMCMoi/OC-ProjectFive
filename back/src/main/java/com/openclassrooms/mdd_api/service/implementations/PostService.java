@@ -1,4 +1,4 @@
-package com.openclassrooms.mdd_api.service;
+package com.openclassrooms.mdd_api.service.implementations;
 
 import com.openclassrooms.mdd_api.dto.post.CreatePostRequestDto;
 import com.openclassrooms.mdd_api.dto.post.GetPostResponseDto;
@@ -10,6 +10,7 @@ import com.openclassrooms.mdd_api.model.User;
 import com.openclassrooms.mdd_api.repository.PostRepository;
 import com.openclassrooms.mdd_api.repository.TopicRepository;
 import com.openclassrooms.mdd_api.repository.UserRepository;
+import com.openclassrooms.mdd_api.service.interfaces.IPostService;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 

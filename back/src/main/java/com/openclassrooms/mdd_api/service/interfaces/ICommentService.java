@@ -1,4 +1,4 @@
-package com.openclassrooms.mdd_api.service;
+package com.openclassrooms.mdd_api.service.interfaces;
 
 import com.openclassrooms.mdd_api.dto.comment.CommentDto;
 import com.openclassrooms.mdd_api.dto.comment.CreateCommentRequest;

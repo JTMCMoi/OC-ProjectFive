@@ -5,7 +5,7 @@ import com.openclassrooms.mdd_api.dto.user.UserAuthResponseDto;
 import com.openclassrooms.mdd_api.dto.user.UserLoginRequestDto;
 import com.openclassrooms.mdd_api.dto.user.UserRegisterRequestDto;
 import com.openclassrooms.mdd_api.exception.ApiException;
-import com.openclassrooms.mdd_api.service.UserService;
+import com.openclassrooms.mdd_api.service.implementations.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
