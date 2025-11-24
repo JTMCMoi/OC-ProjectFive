@@ -1,0 +1,21 @@
+<mat-card class="auth-card">
+  <h2>Se connecter</h2>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>E-mail ou nom d'utilisateur</mat-label>
+      <input matInput formControlName="usernameOrEmail" />
+      <mat-error *ngIf="form.get('usernameOrEmail')?.hasError('required')">Requis</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Mot de passe</mat-label>
+      <input matInput type="password" formControlName="password" />
+      <mat-error *ngIf="form.get('password')?.hasError('required')">Requis</mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="loading">Se connecter</button>
+    <mat-progress-spinner *ngIf="loading" diameter="24" mode="indeterminate"></mat-progress-spinner>
+
+    <p class="error" *ngIf="error">{{ error }}</p>
+  </form>
+</mat-card>
