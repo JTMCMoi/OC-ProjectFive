@@ -1,0 +1,46 @@
+<header class="header">
+    <button mat-icon-button class="back-button" routerLink="/" routerLinkActive="active" >
+    <mat-icon>arrow_back</mat-icon>
+    </button>
+
+  <!-- Logo toujours visible -->
+  <div class="logo-menu">
+ <img class="header__logo" routerLink="/" src="assets/logo_p6.png" alt="Logo">
+
+  <!-- Menu desktop -->
+  <nav *ngIf="isLogged && !isMobile" class="header__menu">
+      <button class="logout" (click)="logout()">Se déconnecter</button>
+      <a routerLink="posts/feed" routerLinkActive="active">Articles</a>
+      <a routerLink="topics/feed" routerLinkActive="active">Thèmes</a>
+      <button mat-icon-button class="header__avatar" routerLink="profile/me" routerLinkActive="active">
+        <mat-icon>person</mat-icon>
+      </button>
+  </nav>
+
+  <!-- Burger mobile -->
+  <span 
+  class="header__burger" 
+  *ngIf="isLogged && isMobile" 
+  (click)="showMenu = true"
+>
+  <mat-icon>menu</mat-icon>
+</span>
+  </div>
+</header>
+
+<!-- MENU MOBILE -->
+<div class="mobile__panel" [class.show]="showMenu" *ngIf="isLogged && isMobile">
+  <nav>
+    <div class="flex-between">
+      <button class="logout" (click)="logout()">Se déconnecter</button>
+      <a routerLink="posts/feed" routerLinkActive="active" (click)="showMenu = false">Articles</a>
+      <a routerLink="/topics/feed" routerLinkActive="active" (click)="showMenu = false">Thèmes</a>
+    </div>
+    <button mat-icon-button class="header__avatar" routerLink="profile/me" routerLinkActive="active">
+      <mat-icon>person</mat-icon>
+    </button>
+  </nav>
+</div>
+
+<!-- Overlay -->
+<div class="overlay" *ngIf="showMenu && isLogged && isMobile" (click)="showMenu = false"></div>

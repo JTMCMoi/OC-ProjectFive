@@ -1,0 +1,46 @@
+.home-container {
+  height: 100vh;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  .logo {
+    width: min(50vw, 280px);  // responsive + limite max
+    height: auto;
+    margin-bottom: 40px;
+  }
+
+  .buttons-row {
+    width: min(50vw, 280px);  // toujours aligné avec le logo
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; // utilisé seulement en desktop
+  }
+
+  button {
+    flex: 1;                // boutons prennent la même taille
+    min-width: 0;           // éviter bugs de shrink
+  }
+}
+
+/* 📱 VERSION MOBILE */
+@media (max-width: 600px) {
+  .home-container {
+    .logo {
+      width: 60vw;   // logo un peu plus large sur mobile
+    }
+
+    .buttons-row {
+      width: 100%;
+      flex-direction: column;   // empilement des boutons
+      gap: 15px;                // espace vertical
+    }
+
+    button {
+      width: 100%;
+    }
+  }
+}
