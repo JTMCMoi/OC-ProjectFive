@@ -1,1 +1,6 @@
+<app-header
+  *ngIf="!hideHeader()"
+  [isLogged]="token.isAuthenticated()">
+</app-header>
+
 <router-outlet></router-outlet>

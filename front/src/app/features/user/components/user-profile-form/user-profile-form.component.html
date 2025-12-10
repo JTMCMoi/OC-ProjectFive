@@ -1,0 +1,40 @@
+<div class="user-profile-container">
+
+  <form (ngSubmit)="updateUser()" class="profile-form">
+    <h1>Mon profil</h1>
+
+    <mat-form-field appearance="outline">
+      <input 
+        matInput 
+        placeholder="Nom d'utilisateur"
+        [(ngModel)]="username"
+        name="username"
+        (click)="selectAll($event)"
+      >
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <input 
+        matInput 
+        placeholder="Email"
+        [(ngModel)]="email"
+        name="email"
+        (click)="selectAll($event)"
+      >
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <input 
+        matInput 
+        placeholder="Nouveau mot de passe"
+        type="password"
+        [(ngModel)]="password"
+        name="password"
+        (click)="selectAll($event)"
+      >
+    </mat-form-field>
+
+    <button mat-raised-button color="primary">Mettre à jour</button>
+  </form>
+
+</div>

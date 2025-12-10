@@ -1,6 +1,7 @@
 package com.openclassrooms.mddapi.controllers;
 
-import com.openclassrooms.mddapi.dto.UserResponseDto;
+import com.openclassrooms.mddapi.dto.auth.UserResponseDto;
+import com.openclassrooms.mddapi.dto.user.UserUpdateDto;
 import com.openclassrooms.mddapi.services.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -76,10 +77,34 @@ public class UserController {
                         .getAuthentication()
                         .getPrincipal();
 
-        String email = connectedUser.getUsername();
+        String identify = connectedUser.getUsername();
 
-        return userService.findByEmail(email)
+        return userService.findByEmailOrUsername(identify)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
+    }
+
+    @PutMapping("/me")
+    public ResponseEntity<?> updateCurrentUser(@RequestBody UserUpdateDto dto) {
+
+        UserDetails connectedUser =
+                (UserDetails) SecurityContextHolder
+                        .getContext()
+                        .getAuthentication()
+                        .getPrincipal();
+
+        String identify = connectedUser.getUsername();
+
+        var optional = userService.findByEmailOrUsername(identify);
+
+        if (optional.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        Long userId = optional.get().id();
+
+        UserResponseDto updated = userService.updateUser(userId, dto);
+
+        return ResponseEntity.ok(updated);
     }
 }

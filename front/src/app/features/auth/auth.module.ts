@@ -14,9 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
 
 import { LoginPageComponent } from './pages/login/login.page.component';
-
 import { RegisterPageComponent } from './pages/register/register.page.component';
-
 
 @NgModule({
   declarations: [

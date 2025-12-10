@@ -1,7 +1,7 @@
 package com.openclassrooms.mddapi.services;
 
-import com.openclassrooms.mddapi.dto.UserLoginDto;
-import com.openclassrooms.mddapi.dto.TokenResponseDto;
+import com.openclassrooms.mddapi.dto.auth.TokenResponseDto;
+import com.openclassrooms.mddapi.dto.auth.UserLoginDto;
 import com.openclassrooms.mddapi.exceptions.AuthenticatedUserNotFound;
 import com.openclassrooms.mddapi.models.AppUserDetails;
 import com.openclassrooms.mddapi.models.UserEntity;
@@ -62,7 +62,7 @@ public class AuthenticationService {
         return new TokenResponseDto(token);
     }
 
-    public String getAuthenticatedUserEmail() {
+    public String getAuthenticatedIdentifier() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication != null && authentication.isAuthenticated()) {
@@ -70,7 +70,7 @@ public class AuthenticationService {
         } else {
             throw new AuthenticatedUserNotFound(
                     "No authenticated user found in Security Context",
-                    "AuthenticationService.getAuthenticatedUserEmail"
+                    "AuthenticationService.getAuthenticatedIdentifier"
             );
         }
     }

@@ -1,0 +1,12 @@
+<mat-card class="post-card" [routerLink]="showTopic ? null : ['/posts/details-post', post.id]">
+  <div class="post-meta">
+    <h3 class="post-title">{{ post.title }}</h3>
+    <div class="post-info">
+      <span class="date">{{ post.createdAt | date:'short' }}</span>
+      <span class="author">{{ post.authorUsername }}</span>
+      <span *ngIf="showTopic" class="topic">{{ post.topicName }}</span>
+    </div>
+  </div>
+
+  <p class="post-content">{{ post.content }}</p>
+</mat-card>

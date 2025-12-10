@@ -18,8 +18,7 @@ import java.time.LocalDateTime;
                 @UniqueConstraint(columnNames = "username")
         }
 )
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

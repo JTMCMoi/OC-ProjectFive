@@ -1,0 +1,6 @@
+.topics-grid {
+      display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 colonnes par défaut */
+  gap: 20px; /* espace entre les colonnes et lignes */
+  padding: 20px;
+}

@@ -1,21 +1,35 @@
-<mat-card class="auth-card">
-  <h2>Se connecter</h2>
-  <form [formGroup]="form" (ngSubmit)="submit()">
-    <mat-form-field appearance="fill" class="full-width">
-      <mat-label>E-mail ou nom d'utilisateur</mat-label>
-      <input matInput formControlName="usernameOrEmail" />
-      <mat-error *ngIf="form.get('usernameOrEmail')?.hasError('required')">Requis</mat-error>
-    </mat-form-field>
+<div class="top-header">
+    <button mat-icon-button class="back-button" routerLink="/">
+    <mat-icon>arrow_back</mat-icon>
+    </button>
+</div>
 
-    <mat-form-field appearance="fill" class="full-width">
-      <mat-label>Mot de passe</mat-label>
-      <input matInput type="password" formControlName="password" />
-      <mat-error *ngIf="form.get('password')?.hasError('required')">Requis</mat-error>
-    </mat-form-field>
+<div class="auth-container">
+  <mat-card class="auth-card">
+    <h2>Se connecter</h2>
 
-    <button mat-raised-button color="primary" type="submit" [disabled]="loading">Se connecter</button>
-    <mat-progress-spinner *ngIf="loading" diameter="24" mode="indeterminate"></mat-progress-spinner>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="form-group">
+        <label for="usernameOrEmail" class="custom-label">E-mail ou nom d'utilisateur</label>
+        <input id="usernameOrEmail" type="text" formControlName="usernameOrEmail" class="custom-input" />
+    </div>
 
-    <p class="error" *ngIf="error">{{ error }}</p>
-  </form>
-</mat-card>
+    <div class="form-group">
+        <label for="password" class="custom-label">Mot de passe</label>
+        <input id="password" type="password" formControlName="password" class="custom-input" />
+    </div>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="loading" >
+        Se connecter
+    </button>
+
+      <mat-progress-spinner
+        *ngIf="loading"
+        diameter="24"
+        mode="indeterminate">
+      </mat-progress-spinner>
+
+      <p class="error" *ngIf="error">{{ error }}</p>
+    </form>
+  </mat-card>
+</div>

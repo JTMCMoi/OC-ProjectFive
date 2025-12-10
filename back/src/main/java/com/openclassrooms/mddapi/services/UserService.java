@@ -1,7 +1,8 @@
 package com.openclassrooms.mddapi.services;
 
-import com.openclassrooms.mddapi.dto.UserRegisterDto;
-import com.openclassrooms.mddapi.dto.UserResponseDto;
+import com.openclassrooms.mddapi.dto.auth.UserRegisterDto;
+import com.openclassrooms.mddapi.dto.auth.UserResponseDto;
+import com.openclassrooms.mddapi.dto.user.UserUpdateDto;
 import com.openclassrooms.mddapi.models.UserEntity;
 import com.openclassrooms.mddapi.repositorys.UserRepository;
 import com.openclassrooms.mddapi.services.mappers.UserMapper;
@@ -9,6 +10,7 @@ import com.openclassrooms.mddapi.services.mappers.UserMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -45,6 +47,42 @@ public class UserService {
                 .build();
 
         userRepository.save(user);
+    }
+
+    public UserResponseDto updateUser(Long id, UserUpdateDto dto) {
+
+        UserEntity user = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        // Vérifie si email unique
+        if (dto.email() != null &&
+            !dto.email().equals(user.getEmail()) &&
+            userRepository.existsByEmail(dto.email())) {
+
+            throw new IllegalStateException("Email déjà utilisé !");
+        }
+
+        // Vérifie si username unique
+        if (dto.username() != null &&
+            !dto.username().equals(user.getUsername()) &&
+            userRepository.existsByUsername(dto.username())) {
+
+            throw new IllegalStateException("Nom d'utilisateur déjà utilisé !");
+        }
+
+        // Applique les modifications simples
+        userMapper.updateEntityFromDto(dto, user);
+
+        // Mise à jour du password
+        if (dto.password() != null && !dto.password().isBlank()) {
+            user.setPassword(passwordEncoder.encode(dto.password()));
+        }
+
+        user.setUpdatedAt(LocalDateTime.now());
+
+        userRepository.save(user);
+
+        return userMapper.toDto(user);
     }
 
     /**
@@ -84,6 +122,14 @@ public class UserService {
     }
 
     /**
+     * Récupère un utilisateur par son identité (DTO).
+     */
+    public Optional<UserResponseDto> findByEmailOrUsername(String identity) {
+        return userRepository.findByEmailOrUsername(identity)
+                .map(userMapper::toDto);
+    }
+
+    /**
      * Vérifie si un utilisateur existe par email.
      */
     public boolean existsByEmail(String email) {
@@ -95,6 +141,13 @@ public class UserService {
      */
     public boolean existsByUserName(String username) {
         return userRepository.existsByUsername(username);
+    }
+
+     /**
+     * Vérifie si un utilisateur existe par username ou son email.
+     */
+    public boolean existsByEmailOrUserName(String identify) {
+        return userRepository.existByEmailOrUsername(identify);
     }
 
     /**
