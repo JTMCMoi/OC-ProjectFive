@@ -6,10 +6,11 @@
     </button>
   </div>
   <div class="start-align">
-    <app-post-card class="post-card"
+    <app-post-card 
       *ngIf="post"
       [post]="post"
-      [showTopic]="true">
+      [showTopic]="true"
+      variant="details">
     </app-post-card>
 
     <h3>Commentaires</h3>

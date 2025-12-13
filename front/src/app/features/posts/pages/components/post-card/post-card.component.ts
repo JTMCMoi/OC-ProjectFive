@@ -9,5 +9,6 @@ import { PostResponse } from 'src/app/shared/models/posts/post-response.model';
 export class PostCardComponent {
   @Input() post!: PostResponse;
   @Input() showTopic: boolean = false;
+  @Input() variant: 'feed'| 'details' = 'feed';
 
 }

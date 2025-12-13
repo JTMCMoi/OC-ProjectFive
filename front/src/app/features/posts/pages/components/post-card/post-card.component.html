@@ -1,4 +1,4 @@
-<mat-card class="post-card" [routerLink]="showTopic ? null : ['/posts/details-post', post.id]">
+<mat-card class="post-card" [ngClass]="variant" [routerLink]="showTopic ? null : ['/posts/details-post', post.id]">
   <div class="post-meta">
     <h3 class="post-title">{{ post.title }}</h3>
     <div class="post-info">

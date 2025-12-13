@@ -7,16 +7,20 @@
 }
 
 .back-button {
-  flex: 0 0 var(--back-w);
-  width: var(--back-w);
-  height: var(--back-w);
+
   display: flex;
+  padding: 10px;
   align-items: center;
   justify-content: center;
 }
 
 .start-align {
-  width: 90%;
+  width: 80%;
+}
+
+app-post-card {
+  display: flex;
+  border-bottom: 1px solid black;
 }
 
 h3 {

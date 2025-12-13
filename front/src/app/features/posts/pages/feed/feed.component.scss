@@ -34,8 +34,8 @@
 /* ================== POSTS GRID ================== */
 .feed {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 colonnes par défaut */
-  gap: 20px; /* espace entre les colonnes et lignes */
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px; 
   padding: 20px;
   
 }
@@ -49,12 +49,12 @@
 /* ================== RESPONSIVE ================== */
 @media (max-width: 600px) {
   .feed-header {
-    flex-direction: column; /* bouton + tri empilés */
+    flex-direction: column; 
     align-items: center;
     gap: 20px;
   }
 
   .feed {
-    grid-template-columns: 1fr; /* 1 seule colonne en mobile */
+    grid-template-columns: 1fr; 
   }
 }

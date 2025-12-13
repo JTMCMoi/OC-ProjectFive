@@ -1,21 +1,24 @@
 .article-create-container {
   display: flex;
-  flex-direction: row;       /* desktop : bouton à gauche, formulaire au centre */
-  align-items: flex-start;   /* alignement vertical en haut */
-  justify-content: center;   /* formulaire centré horizontalement */
+  flex-direction: row;       
+  align-items: flex-start;   
+  justify-content: center;   
   width: 100%;
-  padding: 1rem;
-  gap: 2rem;                 /* espace entre bouton et formulaire */
+  gap: 2rem;                 
 }
 
-/* Bouton back */
 .back-button {
   display: flex;
-  flex-direction: column;   /* bouton seul en column */
+  flex-direction: column;   
   align-items: flex-start;
-  flex-shrink: 0;           /* ne se réduit pas */
+  flex-shrink: 0;
+  padding: 10px;           
 }
-
+h1 {
+  padding-top: 10px;
+  font-size: x-large;
+  font-weight: bold;
+}
 .article {
   width: 100%;
   display: flex;
@@ -27,9 +30,8 @@
   flex-direction: column;
   gap: 1rem;
   width: 100%;
-  max-width: 600px;          /* largeur max du formulaire */
-  align-items: center;       /* centre le formulaire dans sa colonne */
-
+  max-width: 600px;          
+  align-items: center;       
   mat-form-field {
     width: 100%;
   }
@@ -40,19 +42,19 @@
   }
 
   button[type="submit"] {
-    width: 150px;            /* desktop : taille fixe */
+    width: 150px;            
   }
 }
 
 /* ================= RESPONSIVE MOBILE ================= */
 @media (max-width: 600px) {
   .article-create-container {
-    flex-direction: column-reverse; /* bouton au-dessus du formulaire */
-    align-items: center;            /* centre horizontalement */
+    flex-direction: column-reverse;
+    align-items: center;            
     gap: 1rem;
   }
 
   .article-form button[type="submit"] {
-    width: 100%;                    /* bouton prend toute la largeur */
+    width: 100%;                   
   }
 }

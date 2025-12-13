@@ -4,8 +4,26 @@
   box-shadow: 0 2px 4px rgba(0,0,0,0.08);
   background-color: #f9f9f9;
   display: flex;
+  height: 80%;
   flex-direction: column;
   gap: 0.5rem;
+
+    &.feed {
+    border-radius: 8px;
+  }
+
+  &.details {
+    display: flex;
+    height: 80%;
+    width: 100%;
+    box-shadow: none;
+    border-radius: none;
+    border: none;
+    transform: none;
+    background-color: white;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 
   &:hover {
     transform: translateY(-4px);
