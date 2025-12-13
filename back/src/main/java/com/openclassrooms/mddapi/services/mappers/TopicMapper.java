@@ -1,29 +1,44 @@
 package com.openclassrooms.mddapi.services.mappers;
 
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
+import org.springframework.stereotype.Component;
 
 import com.openclassrooms.mddapi.dto.topic.TopicCreateDto;
 import com.openclassrooms.mddapi.dto.topic.TopicResponseDto;
 import com.openclassrooms.mddapi.dto.topic.TopicUpdateDto;
 import com.openclassrooms.mddapi.models.TopicEntity;
 
-@Mapper(componentModel = "spring")
-public interface TopicMapper {
+@Component
+public class TopicMapper {
 
-    // Map entity -> dto
-    TopicResponseDto toDto(TopicEntity entity);
+    public TopicResponseDto toDto(TopicEntity entity) {
+        if (entity == null) return null;
 
-    // Map create dto -> entity
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "createdAt", ignore = true)
-    @Mapping(target = "updatedAt", ignore = true)
-    TopicEntity fromCreateDto(TopicCreateDto dto);
+        return new TopicResponseDto(
+                entity.getId(),
+                entity.getTitle(),
+                entity.getDescription(),
+                entity.getCreatedAt(),
+                entity.getUpdatedAt()
+        );
+    }
 
-    // Map update dto -> entity (used for copying values)
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "createdAt", ignore = true)
-    @Mapping(target = "updatedAt", ignore = true)
-    TopicEntity fromUpdateDto(TopicUpdateDto dto);
+    public TopicEntity fromCreateDto(TopicCreateDto dto) {
+        if (dto == null) return null;
+
+        TopicEntity entity = new TopicEntity();
+        entity.setTitle(dto.title());
+        entity.setDescription(dto.description());
+        return entity;
+    }
+
+    public void updateEntityFromDto(TopicUpdateDto dto, TopicEntity entity) {
+        if (dto == null || entity == null) return;
+
+        if (dto.title() != null) {
+            entity.setTitle(dto.title());
+        }
+        if (dto.description() != null) {
+            entity.setDescription(dto.description());
+        }
+    }
 }

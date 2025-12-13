@@ -1,26 +1,46 @@
 package com.openclassrooms.mddapi.services.mappers;
 
-
-import org.mapstruct.*;
+import org.springframework.stereotype.Component;
 
 import com.openclassrooms.mddapi.dto.auth.UserRegisterDto;
 import com.openclassrooms.mddapi.dto.auth.UserResponseDto;
 import com.openclassrooms.mddapi.dto.user.UserUpdateDto;
 import com.openclassrooms.mddapi.models.UserEntity;
 
-@Mapper(componentModel = "spring")
-public interface UserMapper {
+@Component
+public class UserMapper {
 
-    // Map entity → DTO
-    UserResponseDto toDto(UserEntity user);
+    public UserResponseDto toDto(UserEntity user) {
+        if (user == null) return null;
 
-    // Map DTO → entity (register)
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "createdAt", ignore = true)
-    @Mapping(target = "updatedAt", ignore = true)
-    UserEntity fromRegisterDto(UserRegisterDto dto);
+        return new UserResponseDto(
+                user.getId(),
+                user.getUsername(),
+                user.getEmail(),
+                user.getCreatedAt(),
+                user.getUpdatedAt()
+        );
+    }
 
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    @Mapping(target = "password", ignore = true) // géré dans le service
-    void updateEntityFromDto(UserUpdateDto dto, @MappingTarget UserEntity entity);
+    public UserEntity fromRegisterDto(UserRegisterDto dto) {
+        if (dto == null) return null;
+
+        UserEntity entity = new UserEntity();
+        entity.setUsername(dto.username());
+        entity.setEmail(dto.email());
+        // password géré dans le service
+        return entity;
+    }
+
+    public void updateEntityFromDto(UserUpdateDto dto, UserEntity entity) {
+        if (dto == null || entity == null) return;
+
+        if (dto.username() != null) {
+            entity.setUsername(dto.username());
+        }
+        if (dto.email() != null) {
+            entity.setEmail(dto.email());
+        }
+        // password volontairement ignoré
+    }
 }
