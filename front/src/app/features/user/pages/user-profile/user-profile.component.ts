@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Topic } from 'src/app/shared/models/topics/topic.model';
+import { TopicApiService } from 'src/app/features/topics/topic-api.service';
 import { SubscriptionApiService } from 'src/app/features/subscriptions/subscription-api.service';
 
 @Component({
@@ -13,32 +14,51 @@ export class UserProfileComponent implements OnInit {
   loading = true;
   errorMsg = '';
 
-  constructor(private subsApi: SubscriptionApiService) {}
+  constructor(private subsApi: SubscriptionApiService , private topicApi: TopicApiService ) {}
 
   ngOnInit(): void {
     this.loadUserTopics();
   }
 
-  private loadUserTopics(): void {
-    this.loading = true;
-    this.subsApi.getMySubscriptions().subscribe({
-      next: (subs) => {
-        // Chaque subscription contient topicId et topicName, on map vers Topic
-        this.userTopics = subs.map(s => ({
-  id: s.topicId,
-  title: s.topicName,
-  description: '',
-  createdAt: s.subscribedAt ?? new Date().toISOString()
-}));
+private loadUserTopics(): void {
+  this.loading = true;
 
-        this.loading = false;
-      },
-      error: () => {
-        this.errorMsg = 'Impossible de charger les thèmes abonnés';
-        this.loading = false;
-      }
-    });
-  }
+  // 1) On charge d’abord les subscriptions
+  this.subsApi.getMySubscriptions().subscribe({
+    next: (subs) => {
+
+      // 2) Ensuite on charge tous les topics
+      this.topicApi.getAll().subscribe({
+        next: (allTopics) => {
+
+          // 3) On map chaque subscription vers un vrai Topic
+          this.userTopics = subs.map(s => {
+            const fullTopic = allTopics.find(t => t.id === s.topicId);
+
+            return {
+              id: s.topicId,
+              title: fullTopic?.title ?? s.topicName,
+              description: fullTopic?.description ?? 'Aucune description',
+              createdAt: fullTopic?.createdAt ?? s.subscribedAt ?? new Date().toISOString()
+            };
+          });
+
+          this.loading = false;
+        },
+        error: () => {
+          this.errorMsg = 'Impossible de charger les thèmes.';
+          this.loading = false;
+        }
+      });
+
+    },
+    error: () => {
+      this.errorMsg = 'Impossible de charger les abonnements.';
+      this.loading = false;
+    }
+  });
+}
+
 
   onUnsubscribe(topic: Topic) {
     this.subsApi.unsubscribe(topic.id).subscribe({

@@ -1,0 +1,59 @@
+.user-profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    border-bottom: 1px solid black;
+    margin-bottom: 40px;
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 600px;
+  align-items: center;
+  margin: 15px;
+
+  h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: x-large;
+    margin-bottom: 0%;
+  }
+
+  mat-form-field {
+    width: 90%;
+
+    .mat-form-field-outline {
+      border-radius: 22px;       
+      border-color: #8000ff;     
+    }
+
+    .mat-form-field-outline-thick {
+      border-color: #8000ff;    
+    }
+  }
+
+  input[matInput] {
+    height: 22px;
+    font-size: 1.7rem;         
+    border-radius: 22px;         
+    padding: 0.5rem;
+  }
+
+  button[type="submit"], button[mat-raised-button] {
+    width: 150px;
+  }
+}
+
+/* ================= RESPONSIVE MOBILE ================= */
+@media (max-width: 600px) {
+  .profile-form button[type="submit"], .profile-form button[mat-raised-button] {
+    width: 50%;
+  }
+}

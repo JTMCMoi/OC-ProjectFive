@@ -1,5 +1,25 @@
+
+app-user-profile-form{
+  display: flex;
+  justify-content: center;
+}
+.topics-section{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: x-large;
+    margin-bottom: 0%;
+  }
+}
+
 .topics-grid {
-      display: grid;
+  display: grid;
   grid-template-columns: repeat(2, 1fr); /* 2 colonnes par défaut */
   gap: 20px; /* espace entre les colonnes et lignes */
   padding: 20px;
