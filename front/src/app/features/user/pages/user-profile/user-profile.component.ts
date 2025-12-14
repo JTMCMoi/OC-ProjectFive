@@ -23,15 +23,12 @@ export class UserProfileComponent implements OnInit {
 private loadUserTopics(): void {
   this.loading = true;
 
-  // 1) On charge d’abord les subscriptions
   this.subsApi.getMySubscriptions().subscribe({
     next: (subs) => {
 
-      // 2) Ensuite on charge tous les topics
       this.topicApi.getAll().subscribe({
         next: (allTopics) => {
 
-          // 3) On map chaque subscription vers un vrai Topic
           this.userTopics = subs.map(s => {
             const fullTopic = allTopics.find(t => t.id === s.topicId);
 
