@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { AuthApiService } from 'src/app/features/auth/services/auth-api-.service';
+import { UserApiService } from 'src/app/features/user/services/user-api.service';
 import { TokenService } from './token.service';
 import { LoginRequest } from 'src/app/shared/models/auth/login-request.model';
 import { TokenResponse } from 'src/app/shared/models/auth/token-response.model';
@@ -15,61 +16,55 @@ export class AuthService {
 
   constructor(
     private authApi: AuthApiService,
+    private userApi: UserApiService,
     private token: TokenService
-  ) {
-    this.loadUserFromToken();
-  }
+  ) {}
 
   login(payload: LoginRequest): Observable<TokenResponse> {
     return this.authApi.login(payload).pipe(
-      tap(res => this.handleAuthSuccess(res))
+      tap(res => {
+        if (!res?.token) return;
+
+        this.token.setToken(res.token);
+        this.loadCurrentUser();
+      })
     );
   }
 
   register(payload: RegisterRequest): Observable<TokenResponse> {
     return this.authApi.register(payload).pipe(
-      tap(res => this.handleAuthSuccess(res))
+      tap(res => {
+        if (!res?.token) return;
+
+        this.token.setToken(res.token);
+        this.loadCurrentUser();
+      })
     );
+  }
+
+  loadCurrentUser(): void {
+    if (!this.isAuthenticated()) return;
+
+    this.userApi.getCurrentUser().subscribe({
+      next: user => this.setCurrentUser(user),
+      error: () => this.logout()
+    });
+  }
+
+  setCurrentUser(user: User | null): void {
+    this.currentUserSubject.next(user);
   }
 
   logout(): void {
     this.token.clearToken();
-    this.currentUserSubject.next(null);
+    this.setCurrentUser(null);
   }
 
   isAuthenticated(): boolean {
     return this.token.isAuthenticated();
   }
+
   get currentUser(): User | null {
     return this.currentUserSubject.value;
-  }
-
-  updateCurrentUser(user: User) {
-    this.currentUserSubject.next(user);
-  }
-
-  private handleAuthSuccess(res: TokenResponse) {
-    if (!res?.token) return;
-
-    this.token.setToken(res.token);
-    this.loadUserFromToken();
-  }
-
-  private loadUserFromToken() {
-    const token = this.token.getToken();
-    if (!token) return;
-
-    try {
-      const payload = JSON.parse(atob(token.split('.')[1]));
-
-      this.currentUserSubject.next({
-        id: payload.id,
-        username: payload.username,
-        email: payload.email
-      } as User);
-
-    } catch {
-      this.currentUserSubject.next(null);
-    }
   }
 }

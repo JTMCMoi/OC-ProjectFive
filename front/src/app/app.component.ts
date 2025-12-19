@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { TokenService } from './core/auth/services/token.service';
 import { Router } from '@angular/router';
+import { AuthBootstrapService } from './core/auth/services/auth-bootstrap.service';
 
 @Component({
   selector: 'app-root',
@@ -10,9 +10,11 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'front';
 
-  constructor(public token: TokenService, public router: Router) {}
+  constructor(public router: Router, public bootstrap: AuthBootstrapService) {
+    this.bootstrap.init();
+  }
 
-   hideHeader(): boolean {
+  hideHeader(): boolean {
     const hiddenRoutes = ['/', '/login', '/register'];
     return hiddenRoutes.includes(this.router.url);
   }
