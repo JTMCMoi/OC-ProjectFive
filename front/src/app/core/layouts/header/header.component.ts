@@ -1,27 +1,22 @@
-import { Component, Input, HostListener, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
+import { User } from 'src/app/shared/models/user/user.model';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnChanges {
-
-  @Input() isLogged = false;
+export class HeaderComponent {
   isMobile = false;
   showMenu = false;
-
+  currentUser: User | null = null;
   constructor(private router: Router, private auth: AuthService) {
     this.checkMobile();
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    // Si on se déconnecte → fermer le menu mobile
-    if (changes['isLogged'] && !this.isLogged) {
-      this.showMenu = false;
-    }
+    this.auth.currentUser$.subscribe(user => {
+      this.currentUser = user;
+    });
   }
 
   @HostListener('window:resize')
@@ -33,7 +28,6 @@ export class HeaderComponent implements OnChanges {
     const previous = this.isMobile;
     this.isMobile = window.innerWidth <= 600;
 
-    // Si on passe en desktop → fermer menu mobile
     if (previous !== this.isMobile && !this.isMobile) {
       this.showMenu = false;
     }
@@ -43,5 +37,14 @@ export class HeaderComponent implements OnChanges {
     this.auth.logout();
     this.showMenu = false;
     this.router.navigate(['/auth/login']);
+  }
+
+  hideHeader(): boolean {
+    const hiddenRoutes = ['/', '/login', '/register'];
+    return hiddenRoutes.includes(this.router.url);
+  }
+
+  get isLogged(): boolean {
+    return !!this.currentUser;
   }
 }
