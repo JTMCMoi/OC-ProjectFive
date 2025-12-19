@@ -30,13 +30,11 @@
     justify-content: center;
   }
 
-  /* Style cohérent des boutons */
   button[mat-raised-button] {
     min-width: 120px;
-    font-weight: 600;
+    font-weight: 400px;
   }
 
-  /* Style disabled personnalisé (optionnel, sinon Material gère déjà bien) */
   button[disabled] {
     background-color: #e0e0e0 !important;
     color: #9e9e9e !important;
