@@ -87,4 +87,13 @@ public class UserDetailsServiceImplementation implements UserDetailsService {
 
         return new AppUserDetails(user, usernameOrEmail);
     }
+
+    public UserDetails loadUserById(Long id) {
+        UserEntity user = userRepository.findById(id)
+                .orElseThrow(() ->
+                        new UsernameNotFoundException("Utilisateur non trouvé"));
+
+        return new AppUserDetails(user);
+    }
+
 }

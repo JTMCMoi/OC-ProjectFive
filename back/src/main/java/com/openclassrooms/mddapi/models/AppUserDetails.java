@@ -17,6 +17,12 @@ public class AppUserDetails implements UserDetails {
         this.loginIdentifier = loginIdentifier;
     }
 
+    public AppUserDetails(UserEntity user) {
+        this.user = user;
+        this.loginIdentifier = user.getUsername(); 
+    }
+
+
     public UserEntity getUser() {
         return this.user;
     }

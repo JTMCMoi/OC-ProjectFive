@@ -4,6 +4,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import com.openclassrooms.mddapi.models.AppUserDetails;
+
 @Service
 public class JwtService {
 
@@ -17,11 +19,12 @@ public class JwtService {
         return jwtFactory.generateToken(authentication);
     }
 
-    public String extractUsername(String token) {
-        return jwtFactory.extractUsername(token);
+    public Long extractUserId(String token) {
+        return jwtFactory.extractUserId(token);
     }
 
     public boolean validateToken(String token, UserDetails userDetails) {
-        return extractUsername(token).equals(userDetails.getUsername());
+        return extractUserId(token).equals(((AppUserDetails) userDetails).getId());
     }
+
 }

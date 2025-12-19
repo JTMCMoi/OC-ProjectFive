@@ -1,24 +1,27 @@
 package com.openclassrooms.mddapi.security;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 import org.springframework.security.oauth2.jwt.*;
+import org.springframework.stereotype.Component;
 
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
+import com.openclassrooms.mddapi.models.AppUserDetails;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-
+@Component
 public class HmacJwtFactory {
 
     private final SecretKey secretKey;
     private final JwtEncoder jwtEncoder;
     private final JwtDecoder jwtDecoder;
 
-    public HmacJwtFactory(String secret) {
+    public HmacJwtFactory(@Value("${jwt.secret}")String secret) {
         if (secret == null || secret.length() < 32) {
             throw new IllegalArgumentException("Secret must be at least 32 characters");
         }
@@ -35,12 +38,16 @@ public class HmacJwtFactory {
     public String generateToken(Authentication authentication) {
         Instant now = Instant.now();
 
+        AppUserDetails userDetails =
+        (AppUserDetails) authentication.getPrincipal();
+
         JwtClaimsSet claims = JwtClaimsSet.builder()
                 .issuer("mdd-api")
                 .issuedAt(now)
                 .expiresAt(now.plus(1, ChronoUnit.HOURS))
-                .subject(authentication.getName()) // email ou username
-                .claim("roles", "USER")
+                .subject(String.valueOf(userDetails.getId()))
+                .claim("username", userDetails.getUserName())
+                .claim("email", userDetails.getEmail())
                 .build();
 
         JwtEncoderParameters params = JwtEncoderParameters.from(
@@ -51,10 +58,6 @@ public class HmacJwtFactory {
         return jwtEncoder.encode(params).getTokenValue();
     }
 
-    public String extractUsername(String token) {
-        return jwtDecoder.decode(token).getSubject();
-    }
-
     public JwtEncoder getJwtEncoder() {
         return jwtEncoder;
     }
@@ -62,4 +65,9 @@ public class HmacJwtFactory {
     public JwtDecoder getJwtDecoder() {
         return jwtDecoder;
     }
+
+    public Long extractUserId(String token) {
+        return Long.valueOf(jwtDecoder.decode(token).getSubject());
+    }
+
 }
