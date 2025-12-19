@@ -49,12 +49,16 @@ h1 {
 /* ================= RESPONSIVE MOBILE ================= */
 @media (max-width: 600px) {
   .article-create-container {
-    flex-direction: column-reverse;
+    flex-direction: column;
     align-items: center;            
     gap: 1rem;
   }
 
+  .article-form {
+    margin: 20px;
+  }
+
   .article-form button[type="submit"] {
-    width: 100%;                   
+   max-width: 150px;                   
   }
 }
