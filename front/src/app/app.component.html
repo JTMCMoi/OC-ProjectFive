@@ -1,1 +1,4 @@
-<router-outlet></router-outlet>
+<ng-container *ngIf="bootstrap.ready$ | async">
+  <app-header *ngIf="!hideHeader()"></app-header>
+  <router-outlet></router-outlet>
+</ng-container>

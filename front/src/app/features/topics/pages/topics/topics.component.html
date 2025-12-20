@@ -1,0 +1,43 @@
+<div class="topics-page">
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="loading-center">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <!-- Error -->
+  <p *ngIf="!loading && errorMsg" class="error">
+    {{ errorMsg }}
+  </p>
+
+  <!-- Topics grid -->
+  <div *ngIf="!loading && !errorMsg" class="topics-grid">
+
+    <div class="topic-card" *ngFor="let t of topics">
+
+      <h3>{{ t.title }}</h3>
+      <p class="desc">{{ t.description }}</p>
+
+      <div class="actions">
+        <!-- Déjà abonné -->
+        <button 
+          *ngIf="isSubscribed(t.id)" 
+          class="btn subscribed" 
+          (click)="onUnsubscribe(t)">
+          Déjà abonné
+        </button>
+
+        <!-- S'abonner -->
+        <button 
+          *ngIf="!isSubscribed(t.id)" 
+          class="btn subscribe" 
+          (click)="onSubscribe(t)">
+          S'abonner
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

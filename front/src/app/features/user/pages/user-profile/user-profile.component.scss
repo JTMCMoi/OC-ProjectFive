@@ -1,0 +1,34 @@
+
+app-user-profile-form{
+  display: flex;
+  justify-content: center;
+}
+.topics-section{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: x-large;
+    margin-bottom: 1%;
+  }
+}
+
+.topics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 20px; 
+  padding: 20px;
+
+}
+
+@media (max-width: 600px) {
+  .topics-grid {
+    grid-template-columns: 1fr;
+    gap: 20px; 
+  }
+}

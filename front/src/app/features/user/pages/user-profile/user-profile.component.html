@@ -1,0 +1,29 @@
+<div class="pages container">
+
+  <section class="user-section">
+    <app-user-profile-form></app-user-profile-form>
+  </section>
+
+  <section class="topics-section">
+    <h2>Abonnements</h2>
+
+    <!-- Loading -->
+    <div *ngIf="loading" class="loading-center">
+      <mat-spinner></mat-spinner>
+    </div>
+
+    <!-- Error -->
+    <p *ngIf="!loading && errorMsg" class="error">{{ errorMsg }}</p>
+
+    <!-- Topics list -->
+    <div *ngIf="!loading && !errorMsg" class="topics-grid">
+      <app-topic-card
+        *ngFor="let topic of userTopics"
+        [topic]="topic"
+        [showUnsubscribe]="true"
+        (unsubscribe)="onUnsubscribe(topic)"
+      >
+      </app-topic-card>
+    </div>
+  </section>
+</div>

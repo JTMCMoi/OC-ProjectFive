@@ -1,0 +1,44 @@
+<div class="details-container">
+
+  <div class="header-row">
+    <button mat-icon-button class="back-button" routerLink="/posts/feed">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+  </div>
+  <div class="start-align">
+    <app-post-card 
+      *ngIf="post"
+      [post]="post"
+      [showTopic]="true"
+      variant="details">
+    </app-post-card>
+
+    <h3>Commentaires</h3>
+
+    <div class="comments-list">
+      <div *ngFor="let com of comments" class="comment-card">
+        <div class="comment-header">
+          <span>{{ com.authorUsername }}</span>
+          <span>{{ com.createdAt | date:'short' }}</span>
+        </div>
+        <p class="content">{{ com.content }}</p>
+      </div>
+    </div>
+
+    <!-- Formulaire d’ajout de commentaire -->
+    <div class="comment-input">
+      <mat-form-field appearance="outline" class="full-width">
+        <textarea 
+            matInput 
+            placeholder="Écrire un commentaire..." 
+            [(ngModel)]="newComment">
+        </textarea>
+      </mat-form-field>
+
+      <button mat-fab color="primary" (click)="sendComment()">
+        <mat-icon>send</mat-icon>
+      </button>
+    </div>
+  </div>
+
+</div>

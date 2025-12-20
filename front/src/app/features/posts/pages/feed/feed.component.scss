@@ -1,0 +1,60 @@
+/* ================= FEED HEADER ================= */
+.feed-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: none;
+  background: #fff;
+  gap: 10px;
+}
+
+.feed-header .left-side {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.feed-header .right-side {
+  display: flex;
+  align-items: center;
+}
+
+.sort-container {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.sort-container mat-icon {
+  font-size: 20px;
+}
+
+/* ================== POSTS GRID ================== */
+.feed {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px; 
+  padding: 20px;
+  
+}
+
+.feed app-post-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* ================== RESPONSIVE ================== */
+@media (max-width: 600px) {
+  .feed-header {
+    flex-direction: column; 
+    align-items: center;
+    gap: 20px;
+  }
+
+  .feed {
+    grid-template-columns: 1fr; 
+  }
+}

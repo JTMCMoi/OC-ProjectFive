@@ -1,0 +1,39 @@
+<div class="topic-card">
+  <mat-card-title>{{ topic.title }}</mat-card-title>
+  <mat-card-content>
+    <p>{{ topic.description }}</p>
+  </mat-card-content>
+
+  <mat-card-actions>
+
+    <!-- Mode profil -->
+    <button
+      *ngIf="showUnsubscribe"
+      mat-raised-button
+      color="primary"
+      (click)="onUnsubscribe()"
+    >
+      Se désabonner
+    </button>
+
+    <!-- Page topics : non abonné -->
+    <button
+      *ngIf="!showUnsubscribe && !isSubscribed"
+      mat-raised-button
+      color="primary"
+      (click)="onSubscribe()"
+    >
+      S'abonner
+    </button>
+
+    <!-- Page topics : déjà abonné -->
+    <button
+      *ngIf="!showUnsubscribe && isSubscribed"
+      mat-raised-button
+      color="primary"
+    >
+      Déjà abonné
+    </button>
+
+  </mat-card-actions>
+</div>
