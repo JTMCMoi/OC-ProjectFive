@@ -80,33 +80,79 @@
 }
 
 /* ================== MOBILE ================== */
+/* MOBILE */
 @media (max-width: 600px) {
-  /* Header mobile */
-  .header {
+
+  /* Header mobile non connecté */
+  .header-mobile-guest {
     display: flex;
     flex-direction: column;
-    height: 80px;
-    justify-content: center;
+    height: 300px;
+    justify-content: space-around;
     align-items: center;
     border-bottom: none;
+    position: relative;
   }
 
-  .header__logo {
-    height: 60px;
-    margin: 0 auto;
+  /* Header mobile connecté */
+  .header-mobile-user {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    border-bottom: 1px solid black;
+  }
+
+  /* Logo */
+  .header-mobile-guest .header__logo {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    height: 100%; 
+    margin: 0;
+  }
+
+  .header-mobile-user .header__logo {
+    height: 80px;
+    margin: 0;
     display: block;
   }
 
-  /* Afficher le burger */
-  .header__burger {
-    display: flex;
-    width: 20px;
-    height: 40px;
+  .back-button {
+    display: none; 
     position: absolute;
-    right: 20px;
-    top: 40px;
+    top: 0;
   }
 
+  .header-mobile-guest .back-button {
+
+  display: flex;
+  height: 15%;
+  width: 100%;
+  border: none;
+  flex-direction: column;   
+  align-items: flex-start;
+  flex-shrink: 0;
+  background-color: white;
+  }
+
+  .header-mobile-guest .back-button mat-icon {
+  display: inline-block;
+  height: 100%;
+  width: auto;
+  font-family: 'Material Icons';
+  font-size: 53px;
+}
+
+  /* Burger pour user mobile */
+  .header-mobile-user .header__burger {
+    display: flex;
+    size: 70px;
+    position: absolute;
+    right: 10px;
+    top: 30px;
+  }
   /* Mobile panel */
   .mobile__panel {
     position: fixed;

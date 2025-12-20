@@ -1,6 +1,5 @@
 .home-container {
   height: 100vh;
-  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,10 +13,10 @@
   }
 
   .buttons-row {
-    width: min(50vw, 280px);  // toujours aligné avec le logo
+    width: min(50vw, 280px);  
     display: flex;
     justify-content: space-between;
-    gap: 20px; // utilisé seulement en desktop
+    gap: 20px; 
   }
 
   button {
@@ -29,18 +28,27 @@
 /* 📱 VERSION MOBILE */
 @media (max-width: 600px) {
   .home-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+    
     .logo {
-      width: 60vw;   // logo un peu plus large sur mobile
+      width: 60vw; 
     }
 
     .buttons-row {
       width: 100%;
-      flex-direction: column;   // empilement des boutons
-      gap: 15px;                // espace vertical
+      flex-direction: column; 
+      justify-content: center;  
+      align-items: center;
+      gap: 15px;               
     }
 
     button {
-      width: 100%;
+      width: 50%;
     }
   }
 }
