@@ -16,15 +16,15 @@ import jakarta.validation.constraints.Size;
 @Builder
 public class RegisterRequest {
 
-    @NotBlank(message = "Email is required")
-    @Email(message = "Email should be valid")
+    @NotBlank(message = "Email est requis")
+    @Email(message = "Email doit être valide")
     private String email;
 
-    @NotBlank(message = "Username is required")
-    @Size(min = 3, max = 50, message = "Username must be between 3 and 50 characters")
+    @NotBlank(message = "Le nom est requis")
+    @Size(min = 3, max = 50, message = "Le nom doit faire entre 3 et 50 caractères")
     private String username;
 
-    @NotBlank(message = "Password is required")
+    @NotBlank(message = "Le mot de passe est requis")
     @Pattern(
         regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$",
         message = "Le mot de passe doit contenir au moins 8 caractères, dont une majuscule, une minuscule, un chiffre et un caractère spécial"

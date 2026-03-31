@@ -2,6 +2,7 @@ package com.openclassrooms.mddapi.service;
 
 import com.openclassrooms.mddapi.dto.ThemeResponse;
 import com.openclassrooms.mddapi.exception.ResourceNotFoundException;
+import com.openclassrooms.mddapi.mapper.ThemeMapper;
 import com.openclassrooms.mddapi.model.Theme;
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.repository.ThemeRepository;
@@ -24,6 +25,7 @@ public class ThemeService {
 
     private final ThemeRepository themeRepository;
     private final UserRepository userRepository;
+    private final ThemeMapper themeMapper;
 
     @Transactional(readOnly = true)
     public List<ThemeResponse> getAllThemes() {
@@ -34,13 +36,7 @@ public class ThemeService {
                 .collect(Collectors.toSet());
 
         return themeRepository.findAll().stream()
-                .map(theme -> ThemeResponse.builder()
-                        .id(theme.getId())
-                        .title(theme.getTitle())
-                        .description(theme.getDescription())
-                        .subscribed(subscribedIds.contains(theme.getId()))
-                        .createdAt(theme.getCreatedAt())
-                        .build())
+                .map(theme -> themeMapper.toResponse(theme, subscribedIds.contains(theme.getId())))
                 .collect(Collectors.toList());
     }
 
@@ -48,13 +44,7 @@ public class ThemeService {
     public List<ThemeResponse> getSubscribedThemes() {
         User currentUser = getCurrentUserEntity();
         return currentUser.getSubscribedThemes().stream()
-                .map(theme -> ThemeResponse.builder()
-                        .id(theme.getId())
-                        .title(theme.getTitle())
-                        .description(theme.getDescription())
-                        .subscribed(true)
-                        .createdAt(theme.getCreatedAt())
-                        .build())
+                .map(theme -> themeMapper.toResponse(theme, true))
                 .collect(Collectors.toList());
     }
 

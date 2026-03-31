@@ -4,7 +4,10 @@ import com.openclassrooms.mddapi.dto.CommentRequest;
 import com.openclassrooms.mddapi.dto.CommentResponse;
 import com.openclassrooms.mddapi.dto.PostRequest;
 import com.openclassrooms.mddapi.dto.PostResponse;
+import com.openclassrooms.mddapi.exception.NotSubscribedException;
 import com.openclassrooms.mddapi.exception.ResourceNotFoundException;
+import com.openclassrooms.mddapi.mapper.CommentMapper;
+import com.openclassrooms.mddapi.mapper.PostMapper;
 import com.openclassrooms.mddapi.model.Comment;
 import com.openclassrooms.mddapi.model.Post;
 import com.openclassrooms.mddapi.model.Theme;
@@ -20,7 +23,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -34,6 +36,8 @@ public class PostService {
     private final ThemeRepository themeRepository;
     private final UserRepository userRepository;
     private final CommentRepository commentRepository;
+    private final PostMapper postMapper;
+    private final CommentMapper commentMapper;
 
     @Transactional(readOnly = true)
     public List<PostResponse> getFeed() {
@@ -44,7 +48,7 @@ public class PostService {
         }
         return postRepository.findByThemeInOrderByCreatedAtDesc(subscribedThemes)
                 .stream()
-                .map(this::mapToPostSummary)
+                .map(postMapper::toResponse)
                 .collect(Collectors.toList());
     }
 
@@ -53,6 +57,15 @@ public class PostService {
         User currentUser = getCurrentUserEntity();
         Theme theme = themeRepository.findById(request.getThemeId())
                 .orElseThrow(() -> new ResourceNotFoundException("Thème non trouvé avec l'id : " + request.getThemeId()));
+
+        boolean isSubscribed = currentUser.getSubscribedThemes()
+                .stream()
+                .anyMatch(t -> t.getId().equals(theme.getId()));
+        if (!isSubscribed) {
+            throw new NotSubscribedException(
+                "Vous devez être abonné au thème '" + theme.getTitle() + "' pour y publier un article."
+            );
+        }
 
         Post post = Post.builder()
                 .title(request.getTitle())
@@ -63,7 +76,7 @@ public class PostService {
 
         Post saved = postRepository.save(post);
         log.info("Article créé par {} dans le thème {}", currentUser.getUsername(), theme.getTitle());
-        return mapToPostSummary(saved);
+        return postMapper.toResponse(saved);
     }
 
     @Transactional(readOnly = true)
@@ -73,11 +86,10 @@ public class PostService {
 
         List<CommentResponse> comments = commentRepository.findByPostIdOrderByCreatedAtAsc(id)
                 .stream()
-                .map(this::mapToCommentResponse)
+                .map(commentMapper::toResponse)
                 .collect(Collectors.toList());
 
-        PostResponse response = mapToPostSummary(post);
-        response.setComments(comments);
+        PostResponse response = postMapper.toResponse(post, comments);
         return response;
     }
 
@@ -95,29 +107,7 @@ public class PostService {
 
         Comment saved = commentRepository.save(comment);
         log.info("Commentaire ajouté par {} sur l'article {}", currentUser.getUsername(), postId);
-        return mapToCommentResponse(saved);
-    }
-
-    private PostResponse mapToPostSummary(Post post) {
-        return PostResponse.builder()
-                .id(post.getId())
-                .title(post.getTitle())
-                .content(post.getContent())
-                .authorUsername(post.getAuthor().getUsername())
-                .themeTitle(post.getTheme().getTitle())
-                .themeId(post.getTheme().getId())
-                .createdAt(post.getCreatedAt())
-                .comments(new ArrayList<>())
-                .build();
-    }
-
-    private CommentResponse mapToCommentResponse(Comment comment) {
-        return CommentResponse.builder()
-                .id(comment.getId())
-                .content(comment.getContent())
-                .authorUsername(comment.getAuthor().getUsername())
-                .createdAt(comment.getCreatedAt())
-                .build();
+        return commentMapper.toResponse(saved);
     }
 
     private User getCurrentUserEntity() {

@@ -16,7 +16,7 @@ public class PostRequest {
     private Long themeId;
 
     @NotBlank(message = "Le titre est requis")
-    @Size(max = 200, message = "Le titre ne peut pas dépasser 200 caractères")
+    @Size(max = 100, message = "Le titre ne peut pas dépasser 100 caractères")
     private String title;
 
     @NotBlank(message = "Le contenu est requis")

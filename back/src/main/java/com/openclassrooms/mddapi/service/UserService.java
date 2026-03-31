@@ -3,6 +3,7 @@ package com.openclassrooms.mddapi.service;
 
 import com.openclassrooms.mddapi.dto.UpdateUserRequest;
 import com.openclassrooms.mddapi.dto.UserResponse;
+import com.openclassrooms.mddapi.mapper.UserMapper;
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,10 +22,11 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final UserMapper userMapper;
 
     public UserResponse getCurrentUser() {
         User user = getCurrentUserEntity();
-        return mapToUserResponse(user);
+        return userMapper.toResponse(user);
     }
 
     public UserResponse updateCurrentUser(UpdateUserRequest request) {
@@ -53,7 +55,7 @@ public class UserService {
 
         User savedUser = userRepository.save(user);
         log.info("User profile updated for: {}", savedUser.getUsername());
-        return mapToUserResponse(savedUser);
+        return userMapper.toResponse(savedUser);
     }
 
     private User getCurrentUserEntity() {
@@ -63,16 +65,6 @@ public class UserService {
 
         return userRepository.findByUsername(userDetails.getUsername())
                 .orElseThrow(() -> new RuntimeException("User not found"));
-    }
-
-    private UserResponse mapToUserResponse(User user) {
-        return UserResponse.builder()
-                .id(user.getId())
-                .email(user.getEmail())
-                .username(user.getUsername())
-                .createdAt(user.getCreatedAt())
-                .updatedAt(user.getUpdatedAt())
-                .build();
     }
 }
 

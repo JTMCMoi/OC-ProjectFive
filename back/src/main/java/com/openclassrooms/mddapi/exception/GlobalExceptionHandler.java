@@ -31,6 +31,13 @@ public class GlobalExceptionHandler {
                 .body(new MessageResponse(ex.getMessage()));
     }
 
+    @ExceptionHandler(NotSubscribedException.class)
+    public ResponseEntity<MessageResponse> handleNotSubscribedException(NotSubscribedException ex) {
+        log.error("Not subscribed: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                .body(new MessageResponse(ex.getMessage()));
+    }
+
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<MessageResponse> handleBadCredentialsException(BadCredentialsException ex) {
         log.error("Bad credentials: {}", ex.getMessage());
