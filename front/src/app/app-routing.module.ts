@@ -33,7 +33,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'posts/create',
+    path: 'post/create',
     component: CreatePostComponent,
     canActivate: [AuthGuard]
   },

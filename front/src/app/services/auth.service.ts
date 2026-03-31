@@ -89,14 +89,6 @@ export class AuthService {
     });
   }
 
-  getCurrentUser(): Observable<User | null> {
-    return this.currentUser$;
-  }
-
-  isAuthenticated(): boolean {
-    return this.isLoggedSubject.value;
-  }
-
   refreshCurrentUser(): void {
     this.loadCurrentUser();
   }
