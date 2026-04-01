@@ -32,7 +32,7 @@ export class ThemesComponent implements OnInit {
       },
       error: () => {
         this.errorMessage = 'Impossible de charger les thèmes.';
-        this.loading = false;
+
       }
     });
   }

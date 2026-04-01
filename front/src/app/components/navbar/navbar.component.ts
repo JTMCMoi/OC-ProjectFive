@@ -20,9 +20,6 @@ export class NavbarComponent implements OnInit {
     this.isLogged$ = this.authService.isLogged$;
   }
 
-  goToProfile(): void {
-    this.router.navigate(['/profile']);
-  }
 
   logout(): void {
     this.authService.logout();

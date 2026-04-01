@@ -9,16 +9,21 @@
     </div>
   </div>
 
-  <!-- ===== FIL D'ACTUALITÉ (connecté) ===== -->
+
   <ng-template #feedTemplate>
     <div class="feed-wrapper">
 
       <div class="feed-header">
-        <h1 class="feed-title">Articles</h1>
-        <button mat-icon-button (click)="toggleSort()" class="sort-btn"
-          [matTooltip]="sortDesc ? 'Afficher du plus ancien au plus récent' : 'Afficher du plus récent au plus ancien'">
-          <mat-icon>{{ sortDesc ? 'arrow_downward' : 'arrow_upward' }}</mat-icon>
+        <button mat-stroked-button class="nav-link-btn" routerLink="/post/create" matTooltip="Créer un article">
+          <span class="btn-label">Créer un article</span>
         </button>
+        <div class="sort-group">
+          <span class="sort-label">Trier par</span>
+          <button mat-icon-button (click)="toggleSort()" class="sort-btn"
+                  [matTooltip]="sortDesc ? 'Afficher du plus ancien au plus récent' : 'Afficher du plus récent au plus ancien'">
+            <mat-icon>{{ sortDesc ? 'arrow_downward' : 'arrow_upward' }}</mat-icon>
+          </button>
+        </div>
       </div>
 
       <div class="loading-container" *ngIf="loading">
@@ -29,7 +34,6 @@
       <div class="posts-grid" *ngIf="!loading && displayedPosts.length > 0">
         <mat-card class="post-card" *ngFor="let post of displayedPosts" (click)="goToPost(post.id)">
           <mat-card-header>
-            <span class="theme-chip">{{ post.themeTitle }}</span>
             <mat-card-title class="post-title">{{ post.title }}</mat-card-title>
           </mat-card-header>
           <mat-card-content>

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PostResponse, CommentResponse } from 'src/app/models/post.model';
 import { PostService } from 'src/app/services/post.service';
@@ -16,6 +16,8 @@ export class PostDetailComponent implements OnInit {
   submittingComment = false;
   errorMessage = '';
 
+  @ViewChild(FormGroupDirective) formGroupDirective!: FormGroupDirective;
+
   constructor(
     private fb: FormBuilder,
     private postService: PostService,
@@ -30,6 +32,7 @@ export class PostDetailComponent implements OnInit {
 
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.loading = true;
+
     this.postService.getPost(id).subscribe({
       next: (post) => {
         this.post = post;
@@ -49,7 +52,7 @@ export class PostDetailComponent implements OnInit {
     this.postService.addComment(this.post.id, this.commentForm.value).subscribe({
       next: (comment: CommentResponse) => {
         this.post!.comments = [...this.post!.comments, comment];
-        this.commentForm.reset();
+        this.formGroupDirective.resetForm();
         this.submittingComment = false;
       },
       error: () => {

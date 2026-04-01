@@ -27,15 +27,17 @@
 .nav-icon-btn {
   color: #333333;
   margin-right: 8px;
+  border: none !important;
 
   mat-icon {
-    font-size: 28px;
-    height: 35px;
-    width: 35px;
+    font-size: 29.4px;
+    height: 37px;
+    width: 37px;
   }
 
   &:hover {
     color: #1976d2;
+    border-color: #1976d2;
   }
 }
 
@@ -45,6 +47,7 @@
   display: flex;
   align-items: center;
   gap: 4px;
+  border: none !important;
 
   mat-icon {
     font-size: 18px;
@@ -60,11 +63,21 @@
   display: flex;
   align-items: center;
   gap: 4px;
+  border: none !important;
 
   mat-icon {
     font-size: 18px;
     height: 18px;
     width: 18px;
+  }
+}
+
+/* Page active : texte en violet */
+.active-nav {
+  color: #7b1fa2 !important;
+
+  mat-icon {
+    color: #7b1fa2;
   }
 }
 

@@ -22,7 +22,6 @@
             <mat-icon>arrow_back</mat-icon>
           </button>
           <div class="post-header-info">
-            <span class="theme-chip">{{ post.themeTitle }}</span>
             <mat-card-title class="post-title">{{ post.title }}</mat-card-title>
             <div class="post-meta">
               <span><mat-icon class="meta-icon">person</mat-icon>{{ post.authorUsername }}</span>
@@ -53,10 +52,6 @@
           <mat-divider></mat-divider>
         </div>
       </div>
-
-      <p class="no-comment" *ngIf="post.comments.length === 0">
-        Soyez le premier à commenter cet article !
-      </p>
 
       <!-- Formulaire commentaire -->
       <form [formGroup]="commentForm" (ngSubmit)="submitComment()" class="comment-form">

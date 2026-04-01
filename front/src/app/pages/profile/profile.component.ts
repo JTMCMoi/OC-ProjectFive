@@ -84,16 +84,10 @@ export class ProfileComponent implements OnInit {
     }
 
     this.userService.updateProfile(request).subscribe({
-      next: (updatedUser) => {
-        this.currentUser = updatedUser;
-        this.profileForm.patchValue({
-          email: updatedUser.email,
-          username: updatedUser.username,
-          password: ''
-        });
-        this.successMessage = 'Profil mis à jour avec succès !';
+      next: () => {
         this.saving = false;
-        this.authService.refreshCurrentUser();
+        this.authService.logout();
+        this.router.navigate(['/login']);
       },
       error: (err) => {
         this.errorMessage = err.error?.message || 'Erreur lors de la mise à jour du profil.';
