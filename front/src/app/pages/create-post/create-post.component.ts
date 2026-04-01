@@ -52,7 +52,6 @@ export class CreatePostComponent implements OnInit {
       },
       error: (err) => {
         this.errorMessage = err.error?.message || 'Erreur lors de la création de l\'article.';
-        this.submitting = false;
       }
     });
   }
