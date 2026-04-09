@@ -4,6 +4,12 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+### Secrets — NE JAMAIS commiter ###
+.env
+*.env
+application-local.properties
+application-dev.properties
+
 ### STS ###
 .apt_generated
 .classpath
