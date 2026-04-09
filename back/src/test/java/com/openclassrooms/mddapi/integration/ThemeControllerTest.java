@@ -1,6 +1,5 @@
-package com.openclassrooms.mddapi.integration;
+package com.openclassrooms.mddapi;
 
-import com.openclassrooms.mddapi.config.SecurityConfig;
 import com.openclassrooms.mddapi.controller.ThemeController;
 import com.openclassrooms.mddapi.dto.ThemeResponse;
 import com.openclassrooms.mddapi.security.JwtTokenProvider;
@@ -10,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Import;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -23,16 +21,16 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Tests de la couche HTTP — ThemeController.
+ * Tests d'intégration — couche HTTP de ThemeController.
  * Vérifie l'accès sans auth (401), la liste des thèmes et l'abonnement.
  */
 @WebMvcTest(ThemeController.class)
-@Import(SecurityConfig.class)
-class ThemeControllerTest {
+class ThemeControllerIT {
 
     @Autowired private MockMvc mockMvc;
 
     @MockBean private ThemeService themeService;
+    // Beans requis par SecurityConfig (JwtAuthenticationFilter) — non utilisés directement dans les tests
     @MockBean private UserDetailsServiceImpl userDetailsService;
     @MockBean private JwtTokenProvider jwtTokenProvider;
 
@@ -70,7 +68,9 @@ class ThemeControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.message").value("Abonnement au thème effectué avec succès"));
 
+        // Vérifie que le service a bien été invoqué
         verify(themeService).subscribe(1L);
     }
 }
+
 

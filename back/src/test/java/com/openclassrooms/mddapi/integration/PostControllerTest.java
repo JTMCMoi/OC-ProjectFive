@@ -1,6 +1,5 @@
-package com.openclassrooms.mddapi.integration;
+package com.openclassrooms.mddapi;
 
-import com.openclassrooms.mddapi.config.SecurityConfig;
 import com.openclassrooms.mddapi.controller.PostController;
 import com.openclassrooms.mddapi.dto.PostResponse;
 import com.openclassrooms.mddapi.security.JwtTokenProvider;
@@ -10,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -23,16 +21,16 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Tests de la couche HTTP — PostController.
+ * Tests d'intégration — couche HTTP de PostController.
  * Vérifie l'accès sans auth (401), avec auth (@WithMockUser) et la validation.
  */
 @WebMvcTest(PostController.class)
-@Import(SecurityConfig.class)
-class PostControllerTest {
+class PostControllerIT {
 
     @Autowired private MockMvc mockMvc;
 
     @MockBean private PostService postService;
+    // Beans requis par SecurityConfig (JwtAuthenticationFilter) — non utilisés directement
     @MockBean private UserDetailsServiceImpl userDetailsService;
     @MockBean private JwtTokenProvider jwtTokenProvider;
 
@@ -74,4 +72,5 @@ class PostControllerTest {
                 .andExpect(status().isBadRequest());
     }
 }
+
 
