@@ -77,10 +77,9 @@
 
 /* ── Commentaires ── */
 .comments-section {
-  background: white;
+  background: transparent;
   border-radius: 8px;
   padding: 24px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
 }
 
 .comments-title {
@@ -104,13 +103,6 @@
   align-items: center;
   gap: 8px;
   margin-bottom: 6px;
-}
-
-.comment-icon {
-  font-size: 20px;
-  width: 20px;
-  height: 20px;
-  color: rgba(0,0,0,0.4);
 }
 
 .comment-date {
@@ -143,9 +135,23 @@
   margin-bottom: 8px;
 }
 
-button[type="submit"] {
-  min-width: 120px;
-  height: 40px;
+button[type="submit"].send-btn {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    display: block;
+    width: 40px;
+    height: 40px;
+    fill: rgba(119, 99, 197, 1);
+  }
+
+  &:disabled svg {
+    fill: rgba(0, 0, 0, 0.26);
+  }
 
   mat-spinner { margin: 0 auto; }
 }

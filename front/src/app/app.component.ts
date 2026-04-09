@@ -23,4 +23,9 @@ export class AppComponent {
   get isAuthPage(): boolean {
     return this.router.url === '/login' || this.router.url === '/register';
   }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/']);
+  }
 }

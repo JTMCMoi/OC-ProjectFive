@@ -81,8 +81,32 @@
   }
 }
 
-/* Masquer les textes sur petits écrans */
-@media (max-width: 599px) {
-  .btn-label { display: none; }
-  .nav-link-btn, .logout-btn { min-width: 0; padding: 0 8px; }
+/* Hamburger : visible seulement sur mobile */
+.hamburger-btn {
+  display: none;
+  color: #333;
+  margin-right: 8px;
+
+  @media (max-width: 599px) {
+    display: flex;
+  }
+}
+
+/* Nav desktop : cachée sur mobile */
+.desktop-nav {
+  display: flex;
+  align-items: center;
+
+  @media (max-width: 599px) {
+    display: none;
+  }
+}
+
+/* Page active : texte en violet */
+.active-nav {
+  color: #7b1fa2 !important;
+
+  mat-icon {
+    color: #7b1fa2;
+  }
 }

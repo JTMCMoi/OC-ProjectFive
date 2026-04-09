@@ -33,20 +33,18 @@
       <!-- Articles -->
       <div class="posts-grid" *ngIf="!loading && displayedPosts.length > 0">
         <mat-card class="post-card" *ngFor="let post of displayedPosts" (click)="goToPost(post.id)">
-          <mat-card-header>
-            <mat-card-title class="post-title">{{ post.title }}</mat-card-title>
-          </mat-card-header>
           <mat-card-content>
-            <p class="post-excerpt">{{ post.content | slice:0:150 }}{{ post.content.length > 150 ? '…' : '' }}</p>
+            <h3 class="post-title">{{ post.title }}</h3>
+            <div class="post-footer">
+              <span class="post-meta">
+                {{ post.authorUsername }}
+              </span>
+              <span class="post-meta">
+               {{ post.createdAt | date:'dd/MM/yyyy' }}
+              </span>
+            </div>
+            <p class="post-excerpt">{{ post.content }}</p>
           </mat-card-content>
-          <mat-card-footer class="post-footer">
-            <span class="post-meta">
-              <mat-icon class="meta-icon">person</mat-icon>{{ post.authorUsername }}
-            </span>
-            <span class="post-meta">
-              <mat-icon class="meta-icon">schedule</mat-icon>{{ post.createdAt | date:'dd/MM/yyyy' }}
-            </span>
-          </mat-card-footer>
         </mat-card>
       </div>
 

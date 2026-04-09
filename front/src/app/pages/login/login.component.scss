@@ -16,7 +16,7 @@
 .back-btn {
   position: absolute;
   top: 12px;
-  left: 12px;
+  left:50px;
   color: #000000;
 
   .material-symbols-outlined {
@@ -41,7 +41,7 @@
 
   .mobile-logo {
     display: none;
-    width: 180px;
+    width: 250px;
     margin-bottom: 16px;
 
     @media (max-width: 599px) {
@@ -59,7 +59,19 @@
 
 .full-width {
   width: 100%;
-  margin-bottom: 16px;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 4px;
+}
+
+.field-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 4px;
 }
 
 .error-message {

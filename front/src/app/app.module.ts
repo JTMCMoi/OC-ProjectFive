@@ -16,6 +16,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { TextFieldModule } from '@angular/cdk/text-field';
 
@@ -66,7 +68,9 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     MatChipsModule,
     MatSelectModule,
     MatDividerModule,
-    TextFieldModule
+    TextFieldModule,
+    MatSidenavModule,
+    MatListModule
   ],
   providers: [
     {

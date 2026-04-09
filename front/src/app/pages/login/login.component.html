@@ -10,36 +10,38 @@
 
     <mat-card-content>
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Email ou nom d'utilisateur</mat-label>
-          <input
-            matInput
-            type="text"
-            formControlName="emailOrUsername"
-            placeholder="Entrez votre email ou nom d'utilisateur"
-            autocomplete="username"
-          />
-          <mat-error *ngIf="loginForm.get('emailOrUsername')?.hasError('required')">
-            Ce champ est obligatoire
-          </mat-error>
-        </mat-form-field>
+          <div class="field-group">
+            <label class="field-label">Email ou nom d'utilisateur</label>
+            <mat-form-field appearance="outline" class="full-width">
+              <input
+                matInput
+                type="text"
+                formControlName="emailOrUsername"
+                autocomplete="username"
+              />
+              <mat-error *ngIf="loginForm.get('emailOrUsername')?.hasError('required')">
+                Ce champ est obligatoire
+              </mat-error>
+            </mat-form-field>
+          </div>
 
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Mot de passe</mat-label>
-          <input
-            matInput
-            type="password"
-            formControlName="password"
-            placeholder="Entrez votre mot de passe"
-            autocomplete="current-password"
-          />
-          <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
-            Le mot de passe est obligatoire
-          </mat-error>
-          <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">
-            Le mot de passe doit contenir au moins 6 caractères
-          </mat-error>
-        </mat-form-field>
+          <div class="field-group">
+            <label class="field-label">Mot de passe</label>
+            <mat-form-field appearance="outline" class="full-width">
+              <input
+                matInput
+                type="password"
+                formControlName="password"
+                autocomplete="current-password"
+              />
+              <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+                Le mot de passe est obligatoire
+              </mat-error>
+              <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">
+                Le mot de passe doit contenir au moins 6 caractères
+              </mat-error>
+            </mat-form-field>
+          </div>
 
         <div class="error-message" *ngIf="errorMessage">
           <mat-error>{{ errorMessage }}</mat-error>
