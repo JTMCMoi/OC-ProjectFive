@@ -1,67 +1,7 @@
 # MDD - Monde de Dév
-## Application Full-Stack avec Authentification JWT
+## Application Full-Stack
 
 Ce projet est une application complète de gestion d'utilisateurs avec authentification JWT, développée avec Spring Boot (backend) et Angular (frontend).
-
----
-
-## 📋 Table des matières
-
-1. [Architecture](#architecture)
-2. [Backend - Spring Boot](#backend)
-3. [Frontend - Angular](#frontend)
-4. [Démarrage rapide](#démarrage-rapide)
-5. [Fonctionnalités](#fonctionnalités)
-6. [API Endpoints](#api-endpoints)
-
----
-
-## 🏗️ Architecture
-
-```
-Developpez-une-application-full-stack-complete/
-├── back/                   # Backend Spring Boot
-│   ├── src/
-│   │   └── main/
-│   │       ├── java/
-│   │       │   └── com/openclassrooms/mddapi/
-│   │       │       ├── config/           # Configuration (Security, CORS)
-│   │       │       ├── controller/       # REST Controllers
-│   │       │       ├── dto/              # Data Transfer Objects
-│   │       │       ├── exception/        # Gestion des exceptions
-│   │       │       ├── model/            # Entités JPA
-│   │       │       ├── repository/       # Repositories JPA
-│   │       │       ├── security/         # JWT & Security
-│   │       │       └── service/          # Logique métier
-│   │       └── resources/
-│   │           └── application.properties
-│   └── pom.xml
-│
-└── front/                  # Frontend Angular
-    ├── src/
-    │   └── app/
-    │       ├── guards/               # Navigation guards
-    │       ├── interceptors/         # HTTP interceptors
-    │       ├── models/               # TypeScript models
-    │       ├── pages/                # Components
-    │       │   ├── home/
-    │       │   ├── login/
-    │       │   └── register/
-    │       └── services/             # Angular services
-    └── package.json
-```
-
----
-
-## 🔧 Backend - Spring Boot
-
-### Technologies
-- **Spring Boot 3.2.2**
-- **Spring Security 6** avec JWT
-- **Spring Data JPA**
-- **MySQL 8**
-- **Lombok**
-- **JWT (jjwt 0.12.3)**
 
 ### Installation
 
@@ -87,26 +27,6 @@ spring.datasource.password=votre_mot_de_passe
 jwt.secret=VotreCléSecrèteDe256BitsMinimum
 jwt.expiration=86400000
 ```
-
-### Endpoints API
-
-#### Authentification (`/api/auth`)
-
-| Méthode | Endpoint | Description | Auth requise |
-|---------|----------|-------------|--------------|
-| POST | `/api/auth/register` | Inscription | Non |
-| POST | `/api/auth/login` | Connexion | Non |
-| POST | `/api/auth/logout` | Déconnexion | Oui |
-
-#### Utilisateurs (`/api/user`)
-
-| Méthode | Endpoint | Description | Auth requise |
-|---------|----------|-------------|--------------|
-| GET | `/api/user/me` | Profil actuel | Oui |
-| PUT | `/api/user/me` | Modifier profil | Oui |
-| GET | `/api/user/{id}` | Utilisateur par ID | Oui |
-
----
 
 ## 💻 Frontend - Angular
 
@@ -234,94 +154,6 @@ Le frontend démarrera sur `http://localhost:4200`
 - Guards pour protéger les routes
 - Intercepteur HTTP pour ajouter le token
 
----
-
-## 📝 Exemples de requêtes
-
-### Inscription
-
-```bash
-POST http://localhost:8080/api/auth/register
-Content-Type: application/json
-
-{
-  "email": "user@example.com",
-  "username": "username",
-  "password": "password123"
-}
-```
-
-**Réponse :**
-```json
-{
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-  "type": "Bearer",
-  "id": 1,
-  "username": "username",
-  "email": "user@example.com"
-}
-```
-
-### Connexion
-
-```bash
-POST http://localhost:8080/api/auth/login
-Content-Type: application/json
-
-{
-  "emailOrUsername": "user@example.com",
-  "password": "password123"
-}
-```
-
-### Récupérer le profil
-
-```bash
-GET http://localhost:8080/api/user/me
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-```
-
-**Réponse :**
-```json
-{
-  "id": 1,
-  "email": "user@example.com",
-  "username": "username",
-  "createdAt": "2026-02-25T10:00:00",
-  "updatedAt": "2026-02-25T10:00:00"
-}
-```
-
----
-
-## 🐛 Résolution des problèmes
-
-### Backend
-
-**Erreur de compilation Lombok**
-- Assurez-vous d'utiliser Java 17 ou supérieur
-- Vérifiez que Lombok 1.18.30 est bien dans le pom.xml
-
-**Erreur de connexion MySQL**
-- Vérifiez que MySQL est démarré
-- Vérifiez les identifiants dans `application.properties`
-- La base de données `mdd_db` sera créée automatiquement
-
-### Frontend
-
-**Erreur npm install**
-```bash
-# Nettoyez le cache et réinstallez
-npm cache clean --force
-rm -rf node_modules package-lock.json
-npm install
-```
-
-**Erreur CORS**
-- Vérifiez que le backend est démarré
-- Le CORS est configuré pour accepter `http://localhost:4200`
-
----
 
 ## 📦 Versions des dépendances principales
 
@@ -342,9 +174,8 @@ npm install
 
 ## 📄 Licence
 
-© 2026 OpenClassrooms - Projet pédagogique
+© 2026 - David Cardigos
 
 ---
 
-**Bon développement ! 🚀**
 
