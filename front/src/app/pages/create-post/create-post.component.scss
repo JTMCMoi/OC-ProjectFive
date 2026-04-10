@@ -1,3 +1,10 @@
+.back-arrow-btn {
+  position: fixed;
+  top: 104px;
+  left: 25px;
+  z-index: 99;
+}
+
 .page-container {
   display: flex;
   justify-content: center;
@@ -8,15 +15,24 @@
 .form-card {
   width: 100%;
   max-width: 720px;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
 .header-row {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 15px;
 
-  mat-card-title { font-size: 22px; font-weight: 700; margin: 0; }
+  mat-card-title { font-size: 22px; font-weight: 700; margin: 0; text-align: center; }
+}
+
+::ng-deep .form-card mat-card-header {
+  display: block;
+  width: 100%;
+  padding: 0;
 }
 
 .loading-container {
@@ -26,15 +42,18 @@
 }
 
 .full-width {
-  width: 100%;
-  margin-bottom: 12px;
+  width: 90%;
+  margin: 0 auto 12px;
+  display: block;
 }
 
 .submit-btn {
-  height: 48px;
-  font-size: 16px;
+  width: 20% !important;
+  height: 44px;
+  font-size: 15px;
   font-weight: 500;
-  margin-top: 8px;
+  margin: 8px auto 0;
+  display: block;
 
   mat-spinner { margin: 0 auto; }
 }

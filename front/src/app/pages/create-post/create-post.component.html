@@ -1,12 +1,13 @@
+<button mat-icon-button (click)="goBack()" aria-label="Retour" class="back-arrow-btn">
+  <mat-icon>arrow_back</mat-icon>
+</button>
+
 <div class="page-container">
   <mat-card class="form-card">
 
     <mat-card-header>
       <div class="header-row">
-        <button mat-icon-button (click)="goBack()" aria-label="Retour">
-          <mat-icon>arrow_back</mat-icon>
-        </button>
-        <mat-card-title>Créer un article</mat-card-title>
+        <mat-card-title>Créer un nouvel article</mat-card-title>
       </div>
     </mat-card-header>
 
@@ -56,7 +57,7 @@
           [disabled]="postForm.invalid || submitting || subscribedThemes.length === 0"
           class="full-width submit-btn">
           <mat-spinner diameter="20" *ngIf="submitting"></mat-spinner>
-          <span *ngIf="!submitting">Publier</span>
+          <span *ngIf="!submitting">Créer</span>
         </button>
 
       </form>

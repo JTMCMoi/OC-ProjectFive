@@ -1,3 +1,7 @@
+<button mat-icon-button (click)="goBack()" aria-label="Retour" class="back-arrow-btn">
+  <mat-icon>arrow_back</mat-icon>
+</button>
+
 <div class="page-container">
 
   <!-- Chargement -->
@@ -18,15 +22,12 @@
     <mat-card class="post-card">
       <mat-card-header>
         <div class="post-header">
-          <button mat-icon-button (click)="goBack()" aria-label="Retour">
-            <mat-icon>arrow_back</mat-icon>
-          </button>
           <div class="post-header-info">
             <mat-card-title class="post-title">{{ post.title }}</mat-card-title>
             <div class="post-meta">
               <span>{{ post.createdAt | date:'dd/MM/yyyy' }}</span>
               <span>{{ post.authorUsername }}</span>
-              <span>{{ post.themeTitle }}</span>
+              <span class="meta-theme">{{ post.themeTitle }}</span>
             </div>
           </div>
         </div>

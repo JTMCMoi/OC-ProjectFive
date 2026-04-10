@@ -1,3 +1,10 @@
+.back-arrow-btn {
+  position: fixed;
+  top: 104px;
+  left: 25px;
+  z-index: 99;
+}
+
 .profile-container {
   display: flex;
   justify-content: center;
@@ -10,29 +17,29 @@
   max-width: 500px;
   width: 100%;
   padding: 20px;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
 .header-content {
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
   width: 100%;
   margin-bottom: 16px;
 
-  .back-btn {
-    flex-shrink: 0;
-  }
-
-  mat-card-title {
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 4px;
-  }
+  mat-card-title { text-align: center; font-size: 24px; font-weight: 600; margin-bottom: 4px; }
 
   mat-card-subtitle {
     font-size: 14px;
     color: rgba(0, 0, 0, 0.6);
   }
+}
+
+::ng-deep .profile-card mat-card-header {
+  display: block;
+  width: 100%;
+  padding: 0;
 }
 
 .loading-container {
@@ -77,10 +84,13 @@
 
 .actions {
   margin-top: 24px;
+  display: flex;
+  justify-content: center;
 
   button {
-    height: 48px;
-    font-size: 16px;
+    width: 40%;
+    height: 44px;
+    font-size: 15px;
     font-weight: 500;
 
     mat-spinner {
@@ -171,7 +181,7 @@ mat-card-actions {
 
   .unsubscribe-btn {
     font-size: 13px;
-    width: 100%;
+    width: 80%;
     align-self: center;
   }
 }

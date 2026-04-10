@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -37,6 +37,11 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 
 // Interceptors
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { AuthService } from './services/auth.service';
+
+export function initializeApp(authService: AuthService) {
+  return () => authService.init();
+}
 
 @NgModule({
   declarations: [
@@ -73,6 +78,12 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     MatListModule
   ],
   providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeApp,
+      deps: [AuthService],
+      multi: true
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

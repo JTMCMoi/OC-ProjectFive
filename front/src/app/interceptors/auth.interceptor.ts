@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
@@ -15,13 +15,16 @@ import { Router } from '@angular/router';
 export class AuthInterceptor implements HttpInterceptor {
 
   constructor(
-    private authService: AuthService,
+    private injector: Injector,
     private router: Router
   ) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    // Récupération lazy de AuthService pour éviter la dépendance circulaire
+    const authService = this.injector.get(AuthService);
+
     // Ajouter le token JWT aux requêtes
-    const token = this.authService.getToken();
+    const token = authService.getToken();
     if (token) {
       request = request.clone({
         setHeaders: {
@@ -34,7 +37,7 @@ export class AuthInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401) {
           // Token invalide ou expiré
-          this.authService.logout();
+          authService.logout();
           this.router.navigate(['/login']);
         }
         return throwError(() => error);

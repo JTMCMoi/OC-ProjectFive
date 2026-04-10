@@ -2,12 +2,11 @@
   <mat-card class="profile-card">
     <mat-card-header>
       <div class="header-content">
-        <button mat-icon-button (click)="goBack()" class="back-btn" aria-label="Retour">
+        <button mat-icon-button (click)="goBack()" aria-label="Retour" class="back-arrow-btn">
           <mat-icon>arrow_back</mat-icon>
         </button>
         <div>
-          <mat-card-title>Mon profil</mat-card-title>
-          <mat-card-subtitle>Consultez et modifiez vos informations</mat-card-subtitle>
+          <mat-card-title>Profil d'utilisateur</mat-card-title>
         </div>
       </div>
     </mat-card-header>
@@ -38,18 +37,9 @@
           <mat-error *ngIf="profileForm.get('password')?.hasError('pattern')">8 caractères min. avec majuscule, minuscule, chiffre et caractère spécial</mat-error>
         </mat-form-field>
 
-        <div class="success-message" *ngIf="successMessage">
-          <mat-icon>check_circle</mat-icon>
-          <span>{{ successMessage }}</span>
-        </div>
-
-        <div class="error-message" *ngIf="errorMessage">
-          <mat-error>{{ errorMessage }}</mat-error>
-        </div>
-
         <div class="actions">
           <button mat-raised-button color="primary" type="submit" [disabled]="profileForm.invalid || saving" class="full-width">
-            <span *ngIf="!saving">Enregistrer les modifications</span>
+            <span *ngIf="!saving">Sauvegarder</span>
             <mat-spinner *ngIf="saving" diameter="20"></mat-spinner>
           </button>
         </div>

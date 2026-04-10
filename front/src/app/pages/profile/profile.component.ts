@@ -67,8 +67,6 @@ export class ProfileComponent implements OnInit {
     }
 
     this.saving = true;
-    this.errorMessage = '';
-    this.successMessage = '';
 
     const formValue = this.profileForm.value;
     const request: { email?: string; username?: string; password?: string } = {};

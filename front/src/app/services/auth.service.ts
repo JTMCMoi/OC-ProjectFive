@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, lastValueFrom, map, of, tap } from 'rxjs';
 import { AuthResponse, LoginRequest, RegisterRequest } from '../models/auth.model';
 import { User } from '../models/user.model';
 
@@ -17,11 +17,17 @@ export class AuthService {
   private isLoggedSubject = new BehaviorSubject<boolean>(this.isTokenValid());
   public isLogged$ = this.isLoggedSubject.asObservable();
 
-  constructor(private http: HttpClient) {
-    // Charger l'utilisateur si un token existe
-    if (this.isTokenValid()) {
-      this.loadCurrentUser();
+  constructor(private http: HttpClient) {}
+
+  /**
+   * Appelé par APP_INITIALIZER au démarrage de l'app.
+   * Charge l'utilisateur depuis le serveur si un token valide est présent.
+   */
+  init(): Promise<void> {
+    if (!this.isTokenValid()) {
+      return Promise.resolve();
     }
+    return lastValueFrom(this.loadCurrentUser());
   }
 
   register(request: RegisterRequest): Observable<AuthResponse> {
@@ -73,23 +79,27 @@ export class AuthService {
     this.isLoggedSubject.next(true);
   }
 
-  private loadCurrentUser(): void {
-    this.http.get<User>(`${this.userUrl}/me`).subscribe({
-      next: (user) => {
+  private loadCurrentUser(): Observable<void> {
+    return this.http.get<User>(`${this.userUrl}/me`).pipe(
+      tap(user => {
         this.currentUserSubject.next(user);
         this.isLoggedSubject.next(true);
-      },
-      error: (err) => {
+      }),
+      catchError(err => {
         // Uniquement logout si le token est rejeté par le serveur (401)
         // Pas pour les erreurs réseau temporaires
         if (err.status === 401) {
           this.logout();
         }
-      }
-    });
+        return of(null);
+      }),
+      map(() => undefined as void)
+    );
   }
 
   refreshCurrentUser(): void {
-    this.loadCurrentUser();
+    if (this.isTokenValid()) {
+      this.loadCurrentUser().subscribe();
+    }
   }
 }
