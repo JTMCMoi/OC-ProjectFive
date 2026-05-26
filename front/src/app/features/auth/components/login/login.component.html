@@ -1,0 +1,49 @@
+<div class="login-container">
+
+  <nav class="navbar">
+    <img class="logo-desktop" src="/assets/logo_p6.png" alt="logo" />
+  </nav>
+
+  <div class="content">
+
+    <img class="logo-mobile" src="/assets/logo_p6.png" alt="logo" />
+
+    <div class="header-row">
+      <button mat-icon-button class="back-button" routerLink="/">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h1>Se connecter</h1>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+
+      <div class="field">
+        <label>E-mail ou nom d'utilisateur</label>
+        <input formControlName="identifier" type="text" />
+        <mat-error *ngIf="form.controls['identifier'].touched && form.controls['identifier'].hasError('required')">
+          L'identifiant est requis
+        </mat-error>
+      </div>
+
+      <div class="field">
+        <label>Mot de passe</label>
+        <input formControlName="password" type="password" />
+        <mat-error *ngIf="form.controls['password'].touched && form.controls['password'].hasError('required')">
+          Le mot de passe est requis
+        </mat-error>
+        <mat-error *ngIf="form.controls['password'].touched && form.controls['password'].hasError('minlength')">
+          8 caractères minimum
+        </mat-error>
+      </div>
+
+      <mat-error *ngIf="onError">
+        Identifiant ou mot de passe incorrect
+      </mat-error>
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+        Se connecter
+      </button>
+
+    </form>
+  </div>
+</div>

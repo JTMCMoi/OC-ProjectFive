@@ -1,0 +1,92 @@
+.create-post-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 24px;
+  max-width: 600px;
+  margin: 0 auto;
+
+  .header-row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 32px;
+    position: relative;
+
+    .back-button {
+      position: absolute;
+      left: 0;
+    }
+
+    h1 {
+      flex: 1;
+      text-align: center;
+      font-size: 22px;
+      font-weight: 700;
+      margin: 0;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 16px;
+
+    .field {
+      select, input, textarea {
+        width: 100%;
+        border: 2px solid #7c3aed;
+        border-radius: 8px;
+        padding: 12px 16px;
+        font-size: 15px;
+        outline: none;
+        color: #333;
+        background: white;
+        box-sizing: border-box;
+        font-family: inherit;
+
+        &:focus {
+          border-color: #5b21b6;
+        }
+      }
+
+      select {
+        appearance: none;
+        cursor: pointer;
+        color: #888;
+
+        option:not(:first-child) {
+          color: #333;
+        }
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 200px;
+      }
+    }
+
+    .error {
+      color: #e53935;
+      font-size: 12px;
+    }
+
+    button[type="submit"] {
+      height: 44px;
+      font-size: 16px;
+      width: 40%;
+      align-self: center;
+      border-radius: 24px;
+      margin-top: 8px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 24px 16px;
+
+    form button[type="submit"] {
+      width: 60%;
+    }
+  }
+}

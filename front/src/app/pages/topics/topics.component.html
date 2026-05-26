@@ -1,0 +1,26 @@
+<app-navbar></app-navbar>
+
+<div class="topics-container">
+
+  <div class="topics-grid">
+    <div class="topic-card" *ngFor="let topic of topics">
+
+      <div class="topic-content">
+        <h3>{{ topic.name }}</h3>
+        <p>Description: lorem ipsum is simply dummy text of the
+          printing and typesetting industry. Lorem Ipsum has
+          been the industry's standard...</p>
+      </div>
+
+      <button
+        mat-raised-button
+        [color]="topic.subscribed ? '' : 'primary'"
+        [disabled]="topic.subscribed"
+        (click)="subscribe(topic)">
+        {{ topic.subscribed ? 'Déjà abonné' : "S'abonner" }}
+      </button>
+
+    </div>
+  </div>
+
+</div>

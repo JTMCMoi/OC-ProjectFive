@@ -1,0 +1,31 @@
+<nav class="navbar">
+  <img src="/assets/logo_p6.png" alt="logo" routerLink="/feed" />
+  
+  <!-- Menu de navigation desktop-->
+  <div class="nav-actions">
+    <button class="logout" (click)="logOut()">Se déconnecter</button>
+    <a routerLink="/feed" routerLinkActive="active">Articles</a>
+    <a routerLink="/topics" routerLinkActive="active">Thèmes</a>
+    <button mat-icon-button routerLink="/me">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+  </div>
+
+  <!-- Menu de navigation mobile (à implémenter) -->
+  <button class="hamburger" (click)="toggleMobileMenu()">
+    <mat-icon>menu</mat-icon>
+  </button>
+</nav>
+
+<!-- Overlay pour le menu mobile -->
+<div class="overlay" *ngIf="isMenuOpen" (click)="toggleMobileMenu()"></div>
+
+<!-- Menu mobile latéral -->
+<div class="side-menu" *ngIf="isMenuOpen">
+  <button class="logout" (click)="logOut()">Se déconnecter</button>
+  <a routerLink="/feed" routerLinkActive="active" (click)="toggleMobileMenu()">Articles</a>
+  <a routerLink="/topics" routerLinkActive="active" (click)="toggleMobileMenu()">Thèmes</a>
+  <button mat-icon-button routerLink="/me" (click)="toggleMobileMenu()">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+</div>

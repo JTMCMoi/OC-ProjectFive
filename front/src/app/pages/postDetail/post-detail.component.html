@@ -1,0 +1,48 @@
+<app-navbar></app-navbar>
+
+<div class="post-detail-container" *ngIf="post">
+
+  <div class="header-row">
+    <button mat-icon-button class="back-button" routerLink="/feed">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1>{{ post.title }}</h1>
+  </div>
+
+  <div class="post-meta">
+    <span>{{ post.createdAt | date:'dd/MM/yyyy' }}</span>
+    <span>{{ post.authorUsername }}</span>
+    <span>{{ post.topicName }}</span>
+  </div>
+
+  <p class="post-content">{{ post.content }}</p>
+
+  <hr />
+
+  <h2>Commentaires</h2>
+
+  <div class="comments">
+    <div class="comment" *ngFor="let comment of post.comments">
+      <span class="comment-author">{{ comment.authorUsername }}</span>
+      <div class="comment-bubble">
+        <p>{{ comment.content }}</p>
+      </div>
+    </div>
+
+    <p class="no-comment" *ngIf="post.comments.length === 0">
+      Aucun commentaire pour le moment.
+    </p>
+  </div>
+
+  <div class="comment-form" [formGroup]="commentForm">
+    <textarea
+      formControlName="content"
+      placeholder="Écrivez ici votre commentaire"
+      rows="3">
+    </textarea>
+    <button class="send-btn" (click)="submitComment()" [disabled]="commentForm.invalid">
+      <mat-icon>send</mat-icon>
+    </button>
+  </div>
+
+</div>

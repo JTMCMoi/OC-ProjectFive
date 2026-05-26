@@ -1,0 +1,68 @@
+<app-navbar></app-navbar>
+
+<div class="me-container">
+
+  <h1>Profil utilisateur</h1>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+
+    <div class="field">
+      <input formControlName="username" type="text" placeholder="Username" />
+      <mat-error *ngIf="form.controls['username'].touched && form.controls['username'].hasError('required')">
+        Le nom d'utilisateur est requis
+      </mat-error>
+      <mat-error *ngIf="form.controls['username'].touched && form.controls['username'].hasError('minlength')">
+        3 caractères minimum
+      </mat-error>
+    </div>
+
+    <div class="field">
+      <input formControlName="email" type="email" placeholder="email@email.fr" />
+      <mat-error *ngIf="form.controls['email'].touched && form.controls['email'].hasError('required')">
+        L'email est requis
+      </mat-error>
+      <mat-error *ngIf="form.controls['email'].touched && form.controls['email'].hasError('email')">
+        L'email n'est pas valide
+      </mat-error>
+    </div>
+
+    <div class="field">
+      <input formControlName="password" type="password" placeholder="Mot de passe" />
+    </div>
+
+    <mat-error *ngIf="onError">
+      Une erreur est survenue lors de la mise à jour
+    </mat-error>
+
+    <p class="success" *ngIf="onSuccess">
+      Profil mis à jour avec succès !
+    </p>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+      Sauvegarder
+    </button>
+
+  </form>
+
+  <hr />
+
+  <h2>Abonnements</h2>
+
+  <p class="no-sub" *ngIf="subscriptions.length === 0">
+    Vous n'avez aucun abonnement pour le moment.
+  </p>
+
+  <div class="subscriptions" *ngIf="subscriptions.length > 0">
+    <div class="subscription-card" *ngFor="let sub of subscriptions">
+      <div class="subscription-content">
+        <h3>{{ sub.name }}</h3>
+        <p>Description: lorem ipsum is simply dummy text of the
+          printing and typesetting industry. Lorem Ipsum has
+          been the industry's standard...</p>
+      </div>
+      <button mat-raised-button color="primary" (click)="unsubscribe(sub)">
+        Se désabonner
+      </button>
+      </div>
+    </div>
+</div>

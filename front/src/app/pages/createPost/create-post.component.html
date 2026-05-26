@@ -1,0 +1,38 @@
+<app-navbar></app-navbar>
+
+<div class="create-post-container">
+  <div class="header-row">
+    <button mat-icon-button class="back-button" routerLink="/feed">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1>Créer un nouvel article</h1>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+
+    <div class="field">
+      <select formControlName="topicId">
+        <option value="" disabled selected>Sélectionner un thème</option>
+        <option *ngFor="let topic of topics" [value]="topic.id">
+          {{ topic.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="field">
+      <input formControlName="title" type="text" placeholder="Titre de l'article" />
+    </div>
+
+    <div class="field">
+      <textarea formControlName="content" placeholder="Contenu de l'article" rows="8"></textarea>
+    </div>
+
+    <span class="error" *ngIf="onError">
+      Une erreur est survenue lors de la création de l'article
+    </span>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+      Créer
+    </button>
+  </form>
+</div>

@@ -1,0 +1,33 @@
+#Global configuration
+spring.application.name=NOM DE VOTRE APPLICATION SPRING
+debug=true
+
+#Configuration du port
+server.port=VOTRE PORT DU SERVEUR
+
+#Configuration de la clé JWT
+jwt.key=VOTRE CLE JWT
+
+#Log level configuration
+logging.level.root=error
+logging.level.com.OpenClassrooms-Projet-6=INFO
+logging.level.org.springframework.boot.autoconfigure.h2=INFO
+logging.level.org.springframework.boot.web.embedded.tomcat=INFO
+logging.level.org.springframework.security=DEBUG
+logging.level.org.springframework=DEBUG
+logging.level.com.openclassrooms=DEBUG
+
+#log erreur subscribe
+server.error.include-message=always
+server.error.include-binding-errors=always
+server.error.include-stacktrace=always
+server.error.include-exception=true
+
+#Data Base configuration
+spring.datasource.url=jdbc:URL DE VOTRE BASE DE DONNEES
+spring.datasource.username=root
+spring.datasource.password=VOTRE MOT DE PASSE
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.jpa.hibernate.ddl-auto=validate
+spring.jpa.properties.hibernate.jdbc.time_zone=UTC
+spring.jpa.show-sql=true

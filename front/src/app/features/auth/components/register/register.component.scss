@@ -1,0 +1,127 @@
+.register-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  .navbar {
+    display: flex;
+    align-items: center;
+    padding: 12px 24px;
+    border-bottom: 1px solid #e0e0e0;
+
+    .logo-desktop {
+      height: 72px;
+      display: block;
+    }
+  }
+
+  .logo-mobile {
+    display: none;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    padding: 32px 24px;
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+
+    .header-row {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 32px;
+        position: relative;
+
+        .back-button {
+            position: absolute;
+            left: 0;
+        }
+
+        h1 {
+            flex: 1;
+            text-align: center;
+            font-size: 24px;
+            margin: 0;
+        }
+    }
+    
+    form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      gap: 20px;
+
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+
+        label {
+          font-size: 14px;
+          color: #333;
+        }
+
+        input {
+          height: 44px;
+          border: 1px solid #ccc;
+          border-radius: 8px;
+          padding: 0 12px;
+          font-size: 15px;
+          outline: none;
+          transition: border-color 0.2s;
+
+          &:focus {
+            border-color: #7c3aed;
+          }
+        }
+      }
+
+      button[type="submit"] {
+        margin-top: 8px;
+        height: 44px;
+        font-size: 16px;
+        width: 50%;
+        align-self: center;
+        border-radius: 24px;
+      }
+    }
+  }
+
+@media (max-width: 480px) {
+    .navbar {
+      display: none;
+    }
+
+    .logo-mobile {
+      display: block;
+      width: 180px;       
+      margin-bottom: 16px;
+    }
+
+    .content {
+      padding: 24px 16px;
+      box-sizing: border-box;  
+      form {
+        width: 100%;
+        box-sizing: border-box;  
+
+        .field {
+          input {
+            width: 100%;
+            box-sizing: border-box;  
+          }
+        }
+      }
+
+      button[type="submit"] {
+        width: 50%;
+      }
+    }
+  }
+}
