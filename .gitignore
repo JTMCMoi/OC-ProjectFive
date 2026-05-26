@@ -1,0 +1,10 @@
+# MacOS
+.DS_Store
+**/.DS_Store
+
+# Spring Boot — fichiers sensibles
+back/src/main/resources/application.properties
+
+# Node
+package-lock.json
+front/node_modules/
