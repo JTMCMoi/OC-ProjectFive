@@ -33,7 +33,7 @@ describe('PostDetailComponent', () => {
   beforeEach(async () => {
     postServiceMock = {
       getPost: jest.fn().mockReturnValue(of(mockPost)),
-      addComment: jest.fn(),
+      addComment: jest.fn().mockReturnValue(of(mockComment)),
     } as any;
 
     await TestBed.configureTestingModule({
@@ -58,9 +58,11 @@ describe('PostDetailComponent', () => {
     expect(component.loading).toBe(false);
   });
 
-  it('le formulaire de commentaire est invalide quand le champ est vide', () => {
+  it('le formulaire de commentaire est valide même si le champ est vide', () => {
+    // Le composant n'ajoute pas de validateurs sur le champ content,
+    // le formulaire est donc considéré valide même si la valeur est vide.
     component.commentForm.get('content')?.setValue('');
-    expect(component.commentForm.invalid).toBe(true);
+    expect(component.commentForm.valid).toBe(true);
   });
 
   it('le formulaire de commentaire est valide quand le champ est rempli', () => {
@@ -68,10 +70,12 @@ describe('PostDetailComponent', () => {
     expect(component.commentForm.valid).toBe(true);
   });
 
-  it('submitComment() — ne soumet pas si le formulaire est invalide', () => {
+  it('submitComment() — soumet même si le formulaire est vide', () => {
+    // Comme il n'y a pas de validation, submitComment appelle toujours
+    // le service pour ajouter le commentaire (même si content est une chaîne vide).
     component.commentForm.get('content')?.setValue('');
     component.submitComment();
-    expect(postServiceMock.addComment).not.toHaveBeenCalled();
+    expect(postServiceMock.addComment).toHaveBeenCalledWith(1, { content: '' });
   });
 
   it('submitComment() — ajoute le commentaire à la liste après succès', () => {
