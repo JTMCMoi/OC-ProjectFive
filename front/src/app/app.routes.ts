@@ -4,22 +4,22 @@ export const routes: Routes = [
     {
         path: '',
         loadComponent: () =>
-            import('./features/home/home.component').then(m => m.HomeComponent)
+            import('./features/home/home').then(m => m.Home)
     },
     {
         path: 'login',
         loadComponent: () =>
-            import('./features/auth/login/login.component').then(m => m.LoginComponent)
+            import('./features/auth/login/login').then(m => m.Login)
     },
     {
         path: 'register',
         loadComponent: () =>
-            import('./features/auth/register/register.component').then(m => m.RegisterComponent)
+            import('./features/auth/register/register').then(m => m.Register)
     },
     {
         path: 'feed',
         loadComponent: () =>
-            import('./features/posts/feed/feed.component').then(m => m.FeedComponent)
+            import('./features/posts/feed/feed').then(m => m.Feed)
     },
     {
         path: '**',
