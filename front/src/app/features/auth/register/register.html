@@ -1,1 +1,32 @@
-<p>register works!</p>
+<div class="login-page">
+    <button mat-icon-button routerLink="/" class="back-btn">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+    <header class="login-header">
+        <img src="logo_p6.png" alt="Logo Monde De Dév" class="logo" />
+    </header>
+    <div class="login-container">
+        <h1>Inscription</h1>
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <div class="form-field-group">
+                <label for="login">Nom d'utilisateur</label>
+                <mat-form-field appearance="outline">
+                    <input matInput formControlName="username" />
+                </mat-form-field>
+            </div>
+            <div class="form-field-group">
+                <label for="login">Adresse e-mail</label>
+                <mat-form-field appearance="outline">
+                    <input matInput formControlName="email" />
+                </mat-form-field>
+            </div>
+            <div class="form-field-group">
+                <label for="password">Mot de passe</label>
+                <mat-form-field appearance="outline">
+                    <input matInput type="password" formControlName="password" />
+                </mat-form-field>
+            </div>
+            <button mat-flat-button type="submit">Se connecter</button>
+        </form>
+    </div>
+</div>
