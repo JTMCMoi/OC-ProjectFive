@@ -38,9 +38,27 @@ body {
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+
+/* Border radius des boutons */
 .mat-mdc-unelevated-button,
 .mat-mdc-raised-button,
 .mat-mdc-outlined-button,
 .mat-mdc-button {
   border-radius: 6px !important;
+}
+
+/* Champs de formulaires avec label en out */
+.form-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+
+  label {
+    font-size: 0.875rem;
+    color: var(--mat-sys-on-surface-variant);
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
 }
